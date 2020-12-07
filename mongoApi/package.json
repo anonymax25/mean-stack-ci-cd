@@ -1,10 +1,11 @@
 {
-  "name": "mongoApi",
+  "name": "mongo-api",
   "version": "1.0.0",
   "description": "node.js express api, connected to mongodb",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js &",
+    "start:test": "node app.js &",
+    "start": "node app.js",
     "test": "mocha --exit ./test/routes.test.js",
     "start-dev": "nodemon app.js"
   },
@@ -24,7 +25,6 @@
     "sinon": "^9.0.2"
   },
   "devDependencies": {
-    "cypress": "^4.9.0",
     "nodemon": "^2.0.2"
   }
 }

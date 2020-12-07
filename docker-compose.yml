@@ -1,23 +1,32 @@
 version: '3'
 services:
-  angular_client:
-    build: ./angularClient
-    ports:
-      - "4200:4200"
 
   api:
     build: ./mongoApi
+    depends_on:
+      - "mongodb"
     ports:
       - "8181:8181"
+    networks:
+      - app-network
+
+  angular_client:
+    build: ./angularClient
+    ports:
+      - "4200:4200" 
+    networks:
+      - app-network 
 
   mongodb:
     image: mongo:latest
-    env_file:
-      - mongoApi/.env
     ports:
       - '27017:27017'
     volumes:
       - './database/data:/data/db'
+    networks:
+      - app-network
 
-volumes:
-  mongo-volume:
+networks:
+  app-network:
+    driver: bridge
+

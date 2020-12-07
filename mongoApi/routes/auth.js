@@ -44,6 +44,10 @@ module.exports = function (app) {
         }
 
     });
+    
+    app.get("/", async (req, res) => {
+        res.status(200).json({"message": "Hello World!"});
+    });
 
 
     app.delete("/user/:login/:password", async (req, res) => {

@@ -6,12 +6,8 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-# Install any needed packages
 RUN npm install
 
-#RUN npm install -g @angular/cli #added
-
-# Bundle app source
 COPY . ./
 
 EXPOSE 4200

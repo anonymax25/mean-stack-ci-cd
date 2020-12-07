@@ -20,7 +20,7 @@
         <a class="nav-link" (click)="authService.logout()">Logout</a>
       </li>
       <li *ngIf="authService.user !== undefined" class="nav-item">
-        <button [disabled]="true" class="btn btn-dark">Log in as: {{authService.user.login}}</button>
+        <button [disabled]="true" class="btn btn-dark">Logged in as: {{authService.user.login}}</button>
       </li>
     </ul>
   </div>

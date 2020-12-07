@@ -29,9 +29,9 @@
   <div class="d-flex flex-column align-center col-12">
 
     <div class="row" *ngFor="let task of tasks">
-      <label class=" p-3 bg-dark text-light rounded-pill ">
+      <div class=" p-3 bg-dark text-light rounded-pill ">
         <div> {{ task.name }} , {{task.days}} days <button (click)="deleteTask(task)" class="btn btn-success rounded-pill">Finish</button></div>
-      </label>
+      </div>
     </div>
 
   </div>
