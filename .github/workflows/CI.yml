@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the action will run. Triggers the workflow on pull request
 on:
   push:
    branches: [ develop, master ]
@@ -48,13 +45,3 @@ jobs:
         working-directory: front
         start: npm start
         wait-on: 'http://localhost:4200'
-        
-    #- name: Run Cypress Front
-     # working-directory: front
-     # run: |
-     #   echo 'npm install'
-     #   npm install
-     #   echo 'npm install finished'
-     #   echo 'npm cypress-silent'
-     #   npm cypress-silent
-     #   echo 'npm cypress-silent finished'
