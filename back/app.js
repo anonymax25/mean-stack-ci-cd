@@ -10,22 +10,6 @@ const app = Express();
 async function startServer() {
     try {
 
-
-        await Mongoose.connect('mongodb://mongodb:27017/todo', {
-            useNewUrlParser: true,
-            useCreateIndex: true,
-            useUnifiedTopology: true,
-            authSource: 'admin'
-        }, function (error) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Connected to DB');
-            }
-        });
-        app.listen(8181, () => {
-            console.log("Listening at :8181...");
-        });
         app.use(cors());
         app.use(BodyParser.json());
         app.use(BodyParser.urlencoded({extended: false}));
@@ -50,6 +34,23 @@ async function startServer() {
         });
         await routes(app);
 
+        console.log('Connecting to DB...');
+        
+        Mongoose.connect('mongodb://127.0.0.1:27017/todo', {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useUnifiedTopology: true,
+            authSource: 'admin'
+        }, function (error) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Connected to DB');
+                app.listen(8181, () => {
+                    console.log("Listening at :8181...");
+                });
+            }
+        })
 
     } catch (e) {
         console.error(`Error in server : ${e.toString()}`);
