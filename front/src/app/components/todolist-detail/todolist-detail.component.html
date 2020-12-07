@@ -1,1 +1,12 @@
-<p>todolist-detail works!</p>
+<div class="wrapper fadeInDown">
+    
+    <div id="formContent">
+        <button class="btn btn-info rounded-pill mt-3 ml-3" routerLink="todolist">Back</button>
+        <div *ngIf="task" class="p-3">
+            <p><b>id:</b> {{task._id}}</p>
+            <p><b>name:</b> {{task.name}}</p>
+            <p><b>days:</b> {{task.days}}</p>
+            <p><b>user-id:</b> {{task.user}}</p>
+        </div>
+    </div>
+</div>

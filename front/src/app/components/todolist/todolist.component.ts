@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Task} from '../../task';
+import {Task} from '../../models/task';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiCallService} from '../../services/api-call.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todolist',
@@ -17,7 +18,8 @@ export class TodolistComponent {
   daysCtrl: FormControl;
 
   constructor(private api: ApiCallService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router) {
     this.getTasks();
     this.nameCtrl = formBuilder.control('', Validators.required);
     this.daysCtrl = formBuilder.control('', Validators.required);
@@ -53,5 +55,9 @@ export class TodolistComponent {
 
   resetForm() {
     this.taskForm.reset();
+  }
+
+  taskDetail(task: Task){
+    this.router.navigate([`todo/${task._id}`])
   }
 }

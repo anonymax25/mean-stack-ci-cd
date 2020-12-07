@@ -15,11 +15,27 @@ module.exports = function (app) {
         }
     });
 
-    app.get("/task/:uid", async (request, response) => {
+    app.get("/tasks/:uid", async (request, response) => {
 
         try {
             if(request.params.uid){
                 var result = await TaskModel.find({user: request.params.uid});
+                response.send(result);
+            } else {
+                response.status(400).end();
+            }
+
+        } catch (error) {
+            console.log(error)
+            response.status(500).send(error);
+        }
+    });
+    
+    app.get("/task/:taskId", async (request, response) => {
+
+        try {
+            if(request.params.taskId){
+                var result = await TaskModel.findOne({_id: request.params.taskId});
                 response.send(result);
             } else {
                 response.status(400).end();

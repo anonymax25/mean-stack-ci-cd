@@ -30,7 +30,10 @@
 
     <div class="row" *ngFor="let task of tasks">
       <div class=" p-3 bg-dark text-light rounded-pill ">
-        <div> {{ task.name }} , {{task.days}} days <button (click)="deleteTask(task)" class="btn btn-success rounded-pill">Finish</button></div>
+        <div> {{ task.name }} , {{task.days}} days 
+          <button (click)="taskDetail(task)" class="btn btn-primary rounded-pill mr-2">Detail</button>
+          <button (click)="deleteTask(task)" class="btn btn-success rounded-pill">Finish</button>
+        </div>
       </div>
     </div>
 

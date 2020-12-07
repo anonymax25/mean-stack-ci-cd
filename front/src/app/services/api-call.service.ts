@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import { Task } from '../task';
+import { Task } from '../models/task';
 import {Observable, of} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
@@ -23,8 +23,13 @@ export class ApiCallService {
               private authService: AuthService) { }
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(environment.apiUrl + '/task/' + this.authService.user._id, optionRequete).pipe(
+    return this.http.get<Task[]>(environment.apiUrl + '/tasks/' + this.authService.getUserFromSessionStorage()._id, optionRequete).pipe(
       catchError(this.handleError<Task[]>('getTasks', [])));
+  }
+  
+  getTask(taskId: string): Observable<Task> {
+    return this.http.get<Task>(environment.apiUrl + '/task/' + taskId, optionRequete).pipe(
+      catchError(this.handleError<Task>('getTask')));
   }
 
   deleteTask(id: number): Observable<any> {
@@ -33,7 +38,7 @@ export class ApiCallService {
   }
 
   sendTask(task: Task): Observable<any> {
-    task.user = this.authService.user._id;
+    task.user = this.authService.getUserFromSessionStorage()._id;
     return this.http.post<any>(environment.apiUrl + '/task', task, optionRequete).pipe(
       catchError(this.handleError<any>('sendTask', [])));
   }

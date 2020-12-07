@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import { User } from '../models/user';
 
 const optionRequete = {
   headers: new HttpHeaders({
@@ -16,26 +17,22 @@ const optionRequete = {
 })
 export class AuthService {
   isError = false;
-  isLogged: boolean;
   errorMessage: string;
-  user: any;
 
   constructor(private http: HttpClient,
               private router: Router) {
-    this.isLogged = false;
     this.errorMessage = '';
-    this.user = undefined;
   }
 
 
   logout() {
-    this.user = undefined;
     this.isError = false;
     this.errorMessage = '';
     this.router.navigate(['login']);
+    sessionStorage.clear()
   }
 
-  loginCall(login: string, password: string) {
+  loginCall(login: string, password: string): Observable<User> {
     this.isError = false;
     this.errorMessage = '';
     return this.http.get<any>(environment.apiUrl + '/login/' + login + '/' + password, optionRequete).pipe(
@@ -62,6 +59,14 @@ export class AuthService {
 
   private log(message: string) {
     console.log(message);
+  }
+
+  loggedIn(){
+    return sessionStorage.getItem('user') !== null
+  }
+
+  getUserFromSessionStorage(): User{
+    return JSON.parse(sessionStorage.getItem('user')) as User
   }
 
 

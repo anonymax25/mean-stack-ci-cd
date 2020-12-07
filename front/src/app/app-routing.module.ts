@@ -11,7 +11,7 @@ const routes: Routes = [{path: '', redirectTo: 'start', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'todolist', component: TodolistComponent, canActivate: [ClientGuard]},
-  {path: 'todolist/:id', component: TodolistDetailComponent, canActivate: [ClientGuard]},
+  {path: 'todo/:id', component: TodolistDetailComponent, canActivate: [ClientGuard]},
   {path: '**', redirectTo: 'todolist', pathMatch: 'full'}];
 
 @NgModule({

@@ -13,7 +13,7 @@ export class ClientGuard implements CanActivate {
   }
   // tslint:disable-next-line:max-line-length
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.authService.user == null) {
+    if (!this.authService.loggedIn()) {
       this.router.navigate(['login']);
       return false;
     }
