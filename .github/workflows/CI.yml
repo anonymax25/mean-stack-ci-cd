@@ -30,7 +30,7 @@ jobs:
         mongodb-version: ${{ matrix.mongodb-version }}
         
     - name: Test API
-      working-directory: mongoApi
+      working-directory: back
       run: |
         npm install
         echo 'Finished install'
@@ -47,12 +47,12 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
-        working-directory: angularClient
+        working-directory: front
         start: npm start
         wait-on: 'http://localhost:4200'
         
     #- name: Run Cypress Front
-     # working-directory: angularClient
+     # working-directory: front
      # run: |
      #   echo 'npm install'
      #   npm install
