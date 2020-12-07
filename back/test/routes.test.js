@@ -100,10 +100,20 @@ describe('routes testing', () => {
         });
         it('should get all tasks', (done) => {
             chai.request(server)
-                .get('/task/' + user._id)
+                .get('/tasks/' + user._id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
+                    sampleTask = res.body;
+                    done();
+                });
+        });
+        it('should get one tasks', (done) => {
+            chai.request(server)
+                .get('/task/' + sampleTask[0]._id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
                     sampleTask = res.body;
                     done();
                 });
@@ -115,7 +125,7 @@ describe('routes testing', () => {
     describe('Delete tasks request',()=> {
        it('should delete a task',(done)=> {
            chai.request(server)
-               .delete('/task/' + sampleTask[0]._id)
+               .delete('/task/' + sampleTask._id)
                .end((err, res) => {
                    res.should.have.status(200);
                    res.body.should.be.a('object');
