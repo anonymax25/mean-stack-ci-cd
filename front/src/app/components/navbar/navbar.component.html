@@ -1,0 +1,27 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">Todo-List Thing</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+
+      <li *ngIf="!authService.loggedIn()"class="nav-item">
+        <a class="nav-link" routerLink="login">Login</a>
+      </li>
+      <li *ngIf="!authService.loggedIn()"class="nav-item">
+        <a class="nav-link" routerLink="signup">Sign up</a>
+      </li>
+
+      <li *ngIf="authService.loggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="todolist">Todo list</a>
+      </li>
+      <li *ngIf="authService.loggedIn()" class="nav-item">
+        <a class="nav-link" (click)="authService.logout()">Logout</a>
+      </li>
+      <li *ngIf="authService.loggedIn()" class="nav-item">
+        <button [disabled]="true" class="btn btn-dark">Logged in as: {{authService.getUserFromSessionStorage().login}}</button>
+      </li>
+    </ul>
+  </div>
+</nav>

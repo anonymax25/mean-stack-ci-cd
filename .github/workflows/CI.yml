@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the action will run. Triggers the workflow on pull request
 on:
   push:
    branches: [ develop, master ]
@@ -30,13 +27,12 @@ jobs:
         mongodb-version: ${{ matrix.mongodb-version }}
         
     - name: Test API
-      working-directory: mongoApi
+      working-directory: back
       run: |
         npm install
         echo 'Finished install'
-        npm run start:test
-        echo 'Started server'
         npm test
+        echo 'Finished tests'
       
     - name: Wait a bit for server spool-up
       uses: jakejarvis/wait-action@master
@@ -46,17 +42,6 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
-        working-directory: angularClient
+        working-directory: front
         start: npm start
-        # quote the url to be safe against YML parsing surprises
         wait-on: 'http://localhost:4200'
-        
-    #- name: Run Cypress Front
-     # working-directory: angularClient
-     # run: |
-     #   echo 'npm install'
-     #   npm install
-     #   echo 'npm install finished'
-     #   echo 'npm cypress-silent'
-     #   npm cypress-silent
-     #   echo 'npm cypress-silent finished'
