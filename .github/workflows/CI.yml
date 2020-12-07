@@ -37,6 +37,7 @@ jobs:
         npm run start:test
         echo 'Started server'
         npm test
+        echo 'Finished tests'
       
     - name: Wait a bit for server spool-up
       uses: jakejarvis/wait-action@master
@@ -48,7 +49,6 @@ jobs:
       with:
         working-directory: angularClient
         start: npm start
-        # quote the url to be safe against YML parsing surprises
         wait-on: 'http://localhost:4200'
         
     #- name: Run Cypress Front
