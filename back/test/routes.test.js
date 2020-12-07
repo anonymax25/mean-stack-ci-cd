@@ -57,7 +57,7 @@ describe('routes testing', () => {
      * Test the /POST route
     */
     describe('/POST Task', () => {
-        it('it should POST a task ', (done) => {
+        it('should POST a task ', (done) => {
             chai.request(server)
                 .post('/task')
                 .send({
@@ -71,7 +71,7 @@ describe('routes testing', () => {
                     done();
                 });
         });
-        it('it should not POST a task ', (done) => {
+        it('should not POST a task ', (done) => {
             chai.request(server)
                 .post('/task')
                 .send({
