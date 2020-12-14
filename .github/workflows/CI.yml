@@ -33,6 +33,8 @@ jobs:
         echo 'Finished install'
         npm test
         echo 'Finished tests'
+        npm start
+        echo 'Started back server for Cypress test'
       
     - name: Wait a bit for server spool-up
       uses: jakejarvis/wait-action@master
