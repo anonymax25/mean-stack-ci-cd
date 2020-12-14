@@ -33,8 +33,6 @@ jobs:
         echo 'Finished install'
         npm test
         echo 'Finished tests'
-        npm start
-        echo 'Started back server for Cypress test'
       
     - name: Wait a bit for server spool-up
       uses: jakejarvis/wait-action@master
@@ -44,6 +42,6 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
-        working-directory: back
-        start: npm start && cd ../front && npm start
+        working-directory: front
+        start: concurrently \"npm start\" \"cd ../back && npm start\""
         wait-on: 'http://localhost:4200'

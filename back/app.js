@@ -34,7 +34,8 @@ async function startServer() {
         });
         await routes(app);
 
-        console.log('Connecting to DB... : ' + process.env.MONGO_URL || "mongodb://127.0.0.1:27017/todo" + ";");
+
+        console.log('Connecting to DB... : ', process.env.MONGO_URL !== undefined ? process.env.MONGO_URL : "mongodb://127.0.0.1:27017/todo");
         
         Mongoose.connect(process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/todo', {
             useNewUrlParser: true,
