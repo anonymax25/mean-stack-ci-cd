@@ -42,6 +42,6 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
-        working-directory: front
-        start: npm start
+        working-directory: back
+        start: npm start && cd ../front && npm start
         wait-on: 'http://localhost:4200'
