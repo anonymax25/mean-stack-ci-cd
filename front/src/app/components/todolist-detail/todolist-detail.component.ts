@@ -16,16 +16,15 @@ export class TodolistDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe( paramMap => {
-      console.log(paramMap);
-      
-      
       this.apiCallService.getTask(paramMap["params"]["id"]).subscribe(task => {
         this.task = task
-        console.log(task);
-        
       })
     })
     
+  }
+
+  formatDate(datetime: number): string {
+    return new Date(datetime).toLocaleString();
   }
 
 }

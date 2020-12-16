@@ -1,6 +1,6 @@
 export interface Task {
-  _id: number;
+  _id?: number;
   name: string;
-  days: number;
+  datetime: number;
   user: string;
 }

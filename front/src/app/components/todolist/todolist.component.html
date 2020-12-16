@@ -1,7 +1,7 @@
 <div class="container">
   <div class="jumbotron m-3 p-3 text-center bg-dark">
     <h1 *ngIf="tasks.length > 1" class="text-light">It's time to work!<br><br><span class="label label-info text-danger">You have {{ tasks.length }} tasks</span></h1>
-    <h1 *ngIf="tasks.length == 1" class="text-light"><span class="label label-info">You have <div class="text-danger">{{ tasks.length }}</div> task</span></h1>
+    <h1 *ngIf="tasks.length == 1" class="text-light"><span class="label label-info">You have <div class="text-danger">{{ tasks.length }}</div> task to do</span></h1>
     <h1 *ngIf="tasks.length <= 0" class="text-light">You don't have any tasks</h1>
   </div>
 
@@ -16,10 +16,8 @@
           </small>
         </div>
         <div class="form-group col">
-          <input class="form-control" id="days" type="number" formControlName="days" placeholder="task duration(days)">
-          <small class="error" *ngIf="daysCtrl.touched && daysCtrl.hasError('required')">
-            Duration is required !
-          </small>
+          <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" formControlName="datetime">
+          <owl-date-time #dt1></owl-date-time>
         </div>
       </div>
       <button class="btn btn-dark" type="submit" [disabled]="taskForm.invalid">Add task</button>
@@ -28,9 +26,13 @@
 
   <div class="d-flex flex-column align-center col-12">
 
-    <div class="row" *ngFor="let task of tasks">
-      <div class=" p-3 bg-dark text-light rounded-pill ">
-        <div> {{ task.name }} , {{task.days}} days 
+    <div class="row mb-2" *ngFor="let task of tasks">
+      <div class="p-3 bg-light rounded-pill ">
+        <div class="row">
+          <div class="mx-2">
+            <b class="task-name">{{task.name }}</b> due <i>{{formatDate(task.datetime)}}</i>
+          </div>
+
           <button (click)="taskDetail(task)" class="btn btn-primary rounded-pill mr-2">Detail</button>
           <button (click)="deleteTask(task)" class="btn btn-success rounded-pill">Finish</button>
         </div>
