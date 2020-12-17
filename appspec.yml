@@ -2,29 +2,26 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/aws-codedeploy
+    destination: /home/ubuntu/my-app
+
 permissions:
-  - object: /home/ubuntu
+  - object: /
+    pattern: "**"
     owner: ubuntu
     group: ubuntu
-    type:
-      - directory
-      - file
+
 hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies.sh
-      timeout: 300
-      runas: ubuntu
-  AfterInstall:
-    - location: scripts/compose-down.sh
-    - location: scripts/compose-build.sh
-      timeout: 300
-      runas: ubuntu
-  ApplicationStart:
-    - location: scripts/compose-up.sh
-      timeout: 300
-      runas: ubuntu
   ApplicationStop:
     - location: scripts/compose-down.sh
-      timeout: 300
+      timeout: 10
+      runas: ubuntu
+
+  AfterInstall:
+    - location: scripts/compose-build.sh
+      timeout: 1200
+      runas: ubuntu
+
+  ApplicationStart:
+    - location: scripts/compose-up.sh
+      timeout: 60
       runas: ubuntu
