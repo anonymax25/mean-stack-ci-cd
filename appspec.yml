@@ -11,7 +11,20 @@ permissions:
       - directory
       - file
 hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: ubuntu
+  AfterInstall:
+    - location: scripts/compose-down.sh
+    - location: scripts/compose-build.sh
+      timeout: 300
+      runas: ubuntu
   ApplicationStart:
-    - location: reload-pm2.sh
+    - location: scripts/compose-up.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStop:
+    - location: scripts/compose-down.sh
       timeout: 300
       runas: ubuntu
