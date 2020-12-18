@@ -30,7 +30,7 @@ jobs:
       working-directory: back
       run: |
         npm install
-        echo 'Finished install'
+        echo 'Finished back install'
         npm test
         echo 'Finished tests'
         npm start &
@@ -38,8 +38,10 @@ jobs:
     - name: Start frontend
       working-directory: fornt
       run: |
+        ls
         npm install
-        npm start &
+        echo 'Finished font install'
+        ng serve &
       
     - name: Wait a bit for server spool-up
       uses: jakejarvis/wait-action@master
