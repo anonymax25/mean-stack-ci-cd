@@ -34,15 +34,19 @@ jobs:
         npm test
         echo 'Finished tests'
         npm start &
+
+    - name: Start frontend
+      working-directory: fornt
+      run: |
+        npm install
+        npm start &
       
     - name: Wait a bit for server spool-up
       uses: jakejarvis/wait-action@master
       with:
-        time: '5s' 
+        time: '30s' 
         
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
-        build: npm install -g @angular/cli
-        start: npm start --prefix front
         wait-on: 'http://localhost:4200'
