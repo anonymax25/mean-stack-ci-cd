@@ -36,7 +36,7 @@ jobs:
         npm start &
 
     - name: Start frontend
-      working-directory: fornt
+      working-directory: front
       run: |
         ls
         npm install
