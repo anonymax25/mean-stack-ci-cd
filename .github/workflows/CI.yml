@@ -38,9 +38,8 @@ jobs:
     - name: Start frontend
       working-directory: front
       run: |
-        ls
         npm install
-        echo 'Finished font install'
+        echo 'Finished frSont install'
         ng serve &
       
     - name: Wait a bit for server spool-up
@@ -51,4 +50,5 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
+        working-directory: front
         wait-on: 'http://localhost:4200'
