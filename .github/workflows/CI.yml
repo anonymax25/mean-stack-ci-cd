@@ -44,6 +44,6 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         working-directory: front
-        build: ls
+        build: npm install
         start: ng serve
         wait-on: 'http://localhost:4200'
