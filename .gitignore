@@ -2,4 +2,4 @@
 back/.env
 ./database
 .idea/*
-.env
+#.env
