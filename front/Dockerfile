@@ -12,6 +12,9 @@ RUN npm install
 COPY . .
 #RUN ng serve --port 80
 RUN npm build
+RUN ls
+RUN cd dist && ls
+RUN cd ..
 
 EXPOSE 80
 FROM nginx:1.17.1-alpine
