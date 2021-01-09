@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
     name: String,
-    days: Number,
+    datetime: Number,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

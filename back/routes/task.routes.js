@@ -3,7 +3,7 @@ const TaskModel = require('../models').Task;
 module.exports = function (app) {
     app.post("/task", async (request, response) => {
         try {
-            if (request.body.name && request.body.days && request.body.user) {
+            if (request.body.name && request.body.datetime && request.body.user) {
                 var task = new TaskModel(request.body);
                 var result = await task.save();
                 response.status(201).send(result);
