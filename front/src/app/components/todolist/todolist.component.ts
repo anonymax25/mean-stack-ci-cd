@@ -71,4 +71,8 @@ export class TodolistComponent {
   formatDate(datetime: number): string {
     return new Date(datetime).toLocaleString();
   }
+
+  isOverdue(task: Task): boolean {    
+    return task.datetime < Date.now();
+  }
 }

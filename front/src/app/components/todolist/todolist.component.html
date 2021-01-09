@@ -6,17 +6,17 @@
   </div>
 
   <div class="text-center bg-secondary mb-3">
-    <h1>Add a task to your list</h1>
+    <h1>Add a task to your todo-list</h1>
     <form  [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)" (reset)="resetForm()">
-      <div class="form-row">
-        <div class="form-group col">
-          <input class="form-control" id="name" type="text" formControlName="name" placeholder="task name">
+      <div class="col-md-4 offset-md-4 col-sm-10 offset-sm-1">
+        <div class="form-group">
+          <input class="form-control" id="name" type="text" formControlName="name" placeholder="Task name">
           <small class="error" *ngIf="nameCtrl.touched && nameCtrl.hasError('required')">
             Name is required !
           </small>
         </div>
-        <div class="form-group col">
-          <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" formControlName="datetime">
+        <div class="form-group">
+          <input class="p-1 rounded" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" formControlName="datetime">
           <owl-date-time #dt1></owl-date-time>
         </div>
       </div>
@@ -26,16 +26,18 @@
 
   <div class="d-flex flex-column align-center col-12">
 
+
     <div class="row mb-2" *ngFor="let task of tasks">
-      <div class="p-3 bg-light rounded-pill ">
+      <div class="p-3 bg-light rounded-pill">
         <div class="row">
           <div class="mx-2">
             <b class="task-name">{{task.name }}</b> due <i>{{formatDate(task.datetime)}}</i>
+            <div class="badge badge-pill badge-danger ml-2" *ngIf="isOverdue(task)">Overdue</div>
           </div>
-
           <button (click)="taskDetail(task)" class="btn btn-primary rounded-pill mr-2">Detail</button>
           <button (click)="deleteTask(task)" class="btn btn-success rounded-pill">Finish</button>
         </div>
+
       </div>
     </div>
 
