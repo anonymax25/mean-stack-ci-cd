@@ -1,6 +1,5 @@
 *node_modules*
-back/.env
+#back/.env
 ./database
 .idea/*
-database/
-.env
+#.env

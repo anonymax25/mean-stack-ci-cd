@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Task} from '../../models/task';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../../services/task.service';
@@ -11,12 +11,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent {
-
+  
   tasks: Task[] = [];
 
   taskForm: FormGroup;
   nameCtrl: FormControl;
-  daysCtrl: FormControl;
+  datetime: FormControl;
 
   constructor(private taskService: TaskService,
               private formBuilder: FormBuilder,
@@ -24,11 +24,11 @@ export class TodolistComponent {
               private router: Router) {
     this.getTasks();
     this.nameCtrl = formBuilder.control('', Validators.required);
-    this.daysCtrl = formBuilder.control('', Validators.required);
+    this.datetime = formBuilder.control('', Validators.required);
 
     this.taskForm = this.formBuilder.group({
       name: this.nameCtrl,
-      days: this.daysCtrl
+      datetime: this.datetime
     });
   }
 
@@ -36,7 +36,13 @@ export class TodolistComponent {
     const userId = this.authService.getUserFromSessionStorage()._id
     this.taskService.getTasks(userId)
       .subscribe(data => {
-        this.tasks = data;
+        this.tasks = data.sort((a, b) => {
+          if(a.datetime > b.datetime)
+            return 1
+          if(a.datetime < b.datetime)
+            return -1
+          return 0
+        });
       });
   }
 
@@ -48,8 +54,7 @@ export class TodolistComponent {
   }
 
   onSubmit(task) {
-    // Process checkout data here
-    if (task.name.length < 1 || task.days.length < 1) {
+    if (task.name.length < 1) {
       return;
     }
     task.datetime = Date.parse(task.datetime)
@@ -64,5 +69,13 @@ export class TodolistComponent {
 
   taskDetail(task: Task){
     this.router.navigate([`todo/${task._id}`])
+  }
+
+  formatDate(datetime: number): string {
+    return new Date(datetime).toLocaleString();
+  }
+
+  isOverdue(task: Task): boolean {    
+    return task.datetime < Date.now();
   }
 }

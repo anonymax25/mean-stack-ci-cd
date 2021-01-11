@@ -62,7 +62,7 @@ describe('routes testing', () => {
                 .post('/task')
                 .send({
                     name: 'Tasking',
-                    days: 3,
+                    datetime: Date.now(),
                     user: user._id
                 })
                 .end((err, res) => {
@@ -76,7 +76,7 @@ describe('routes testing', () => {
                 .post('/task')
                 .send({
                     name: faker.name.jobTitle(),
-                    days: faker.name.jobTitle(),
+                    datetime: faker.name.jobTitle(),
                     user: user._id
                 })
                 .end((err, res) => {

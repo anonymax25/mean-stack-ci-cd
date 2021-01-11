@@ -1,6 +1,6 @@
 # Projet
 
-This project was made to test development tools such as Docker/Docker-compose and git.
+This project was made to test development tools such as Docker/Docker-compose, git, back-end unit testing, front-end integration testing, deployement to AWS ec2 and more.
 
 ## Installation
 
@@ -8,11 +8,7 @@ This project was made to test development tools such as Docker/Docker-compose an
 npm i
 ```
 
-## Run the Docker Compose
+## Run
 ```bash
-docker-compose build
-```
-
-```bash
-docker-compose up
+docker-compose build && docker-compose up -d
 ```

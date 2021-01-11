@@ -12,6 +12,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TodolistDetailComponent } from './components/todolist-detail/todolist-detail.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImportMaterialModule } from './app.material.module';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { AvatarFormComponent } from './components/account/avatar-form/avatar-form.component';
@@ -32,7 +34,11 @@ import { AccountComponent } from './components/account/account.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ImportMaterialModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

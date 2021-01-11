@@ -18,11 +18,13 @@ export class TodolistDetailComponent implements OnInit {
     this.route.paramMap.subscribe( paramMap => {
       this.taskService.getTask(paramMap["params"]["id"]).subscribe(task => {
         this.task = task
-        console.log(task);
-        
       })
     })
     
+  }
+
+  formatDate(datetime: number): string {
+    return new Date(datetime).toLocaleString();
   }
 
 }
