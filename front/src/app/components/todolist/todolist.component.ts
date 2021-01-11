@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {Task} from '../../models/task';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ApiCallService} from '../../services/api-call.service';
+import {TaskService} from '../../services/task.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-todolist',
@@ -17,8 +18,9 @@ export class TodolistComponent {
   nameCtrl: FormControl;
   datetime: FormControl;
 
-  constructor(private api: ApiCallService,
+  constructor(private taskService: TaskService,
               private formBuilder: FormBuilder,
+              private authService: AuthService,
               private router: Router) {
     this.getTasks();
     this.nameCtrl = formBuilder.control('', Validators.required);
@@ -31,7 +33,8 @@ export class TodolistComponent {
   }
 
   getTasks() {
-    this.api.getTasks()
+    const userId = this.authService.getUserFromSessionStorage()._id
+    this.taskService.getTasks(userId)
       .subscribe(data => {
         this.tasks = data.sort((a, b) => {
           if(a.datetime > b.datetime)
@@ -44,7 +47,7 @@ export class TodolistComponent {
   }
 
   deleteTask(task: Task) {
-    this.api.deleteTask(task._id)
+    this.taskService.deleteTask(task._id)
       .subscribe(data => {
         this.getTasks();
       });
@@ -56,7 +59,7 @@ export class TodolistComponent {
     }
     task.datetime = Date.parse(task.datetime)
 
-    this.api.sendTask(task).subscribe(() => this.getTasks());
+    this.taskService.createTask(task).subscribe(() => this.getTasks());
     this.resetForm();
   }
 

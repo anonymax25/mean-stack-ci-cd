@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from 'src/app/models/task';
-import { ApiCallService } from 'src/app/services/api-call.service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-todolist-detail',
@@ -11,12 +11,12 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 export class TodolistDetailComponent implements OnInit {
   task: Task;
 
-  constructor(private apiCallService: ApiCallService,
+  constructor(private taskService: TaskService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe( paramMap => {
-      this.apiCallService.getTask(paramMap["params"]["id"]).subscribe(task => {
+      this.taskService.getTask(paramMap["params"]["id"]).subscribe(task => {
         this.task = task
       })
     })
