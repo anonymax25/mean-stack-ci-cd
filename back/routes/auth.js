@@ -10,7 +10,8 @@ module.exports = function (app) {
             try {
                 const user = new User({
                     login: req.body.login,
-                    password: SecurityUtil.hashPassword(req.body.password)
+                    password: SecurityUtil.hashPassword(req.body.password),
+                    avatarKey: null
                 })
                 await user.save();
 

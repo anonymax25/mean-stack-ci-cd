@@ -69,5 +69,9 @@ export class AuthService {
     return JSON.parse(sessionStorage.getItem('user')) as User
   }
 
+  setUserToSessionStorage(user: User) {
+    sessionStorage.setItem('user', JSON.stringify(user))
+  }
+
 
 }

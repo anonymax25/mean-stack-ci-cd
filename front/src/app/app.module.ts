@@ -13,6 +13,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { TodolistDetailComponent } from './components/todolist-detail/todolist-detail.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+import { AvatarFormComponent } from './components/account/avatar-form/avatar-form.component';
+import { AccountComponent } from './components/account/account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     LoginComponent,
     SignupComponent,
     TodolistDetailComponent,
-    NavbarComponent
+    NavbarComponent,
+    AccountComponent,
+    AvatarFormComponent
   ],
   imports: [
     BrowserModule,

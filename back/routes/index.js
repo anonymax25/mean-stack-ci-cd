@@ -1,4 +1,5 @@
 module.exports = function (app) {
-    require('./task.routes')(app);
+    require('./task.route')(app);
+    require('./user.route')(app);
     require('./auth')(app);
 }

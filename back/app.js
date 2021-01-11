@@ -1,6 +1,7 @@
 require('dotenv').config();
 const Express = require("express");
 const Mongoose = require("mongoose");
+const helmet = require('helmet');
 const BodyParser = require("body-parser");
 const cors = require('cors');
 const routes = require('./routes');
@@ -58,7 +59,7 @@ async function startServer() {
     }
 }
 
-startServer().then();
+startServer();
 
 module.exports = app;
 

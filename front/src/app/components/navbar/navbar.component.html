@@ -14,7 +14,10 @@
       </li>
 
       <li *ngIf="authService.loggedIn()" class="nav-item">
-        <a class="nav-link" routerLink="todolist">Todo list</a>
+        <a class="nav-link" routerLink="todo">Todo list</a>
+      </li>
+      <li *ngIf="authService.loggedIn()" class="nav-item">
+        <a class="nav-link" (click)="goToAccount()">Account</a>
       </li>
       <li *ngIf="authService.loggedIn()" class="nav-item">
         <a class="nav-link" (click)="authService.logout()">Logout</a>

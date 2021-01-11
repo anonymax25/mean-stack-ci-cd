@@ -17,13 +17,13 @@ const optionRequete = {
 @Injectable({
   providedIn: 'root'
 })
-export class ApiCallService {
+export class TaskService {
 
   constructor(private http: HttpClient,
               private authService: AuthService) { }
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(environment.apiUrl + '/tasks/' + this.authService.getUserFromSessionStorage()._id, optionRequete).pipe(
+  getTasks(userId): Observable<Task[]> {
+    return this.http.get<Task[]>(environment.apiUrl + '/tasks/' + userId, optionRequete).pipe(
       catchError(this.handleError<Task[]>('getTasks', [])));
   }
   
@@ -37,7 +37,7 @@ export class ApiCallService {
       catchError(this.handleError<any>('deleteTask', [])));
   }
 
-  sendTask(task: Task): Observable<any> {
+  createTask(task: Task): Observable<any> {
     task.user = this.authService.getUserFromSessionStorage()._id;
     return this.http.post<any>(environment.apiUrl + '/task', task, optionRequete).pipe(
       catchError(this.handleError<any>('sendTask', [])));
