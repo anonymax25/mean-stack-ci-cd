@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent {
-  
+
   tasks: Task[] = [];
 
   taskForm: FormGroup;
@@ -47,8 +47,7 @@ export class TodolistComponent {
   }
 
   deleteTask(task: Task) {
-    this.taskService.deleteTask(task._id)
-      .subscribe(data => {
+    this.taskService.deleteTask(task._id).subscribe(() => {
         this.getTasks();
       });
   }
@@ -75,7 +74,7 @@ export class TodolistComponent {
     return new Date(datetime).toLocaleString();
   }
 
-  isOverdue(task: Task): boolean {    
+  isOverdue(task: Task): boolean {
     return task.datetime < Date.now();
   }
 }

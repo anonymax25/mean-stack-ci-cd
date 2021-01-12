@@ -3,6 +3,10 @@
   cursor: default;
 }
 
+.nav-link, img {
+  cursor: pointer;
+}
+
 img {
   border-radius: 50%;
   height: 33px;

@@ -7,15 +7,12 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   login: string;
   password: string;
 
   constructor(public authService: AuthService,
               private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   loginSubmit() {
     this.authService.loginCall(this.login, this.password).subscribe(user => {
