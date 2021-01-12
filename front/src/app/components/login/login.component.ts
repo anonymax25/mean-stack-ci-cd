@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   loginSubmit() {
     this.authService.loginCall(this.login, this.password).subscribe(user => {
       if (this.authService.errorMessage.length === 0) {
-        this.authService.setUserToSessionStorage(user)
+        this.authService.setUserToSessionStorage(user);
         this.router.navigate(['todo']);
       } else {
         alert('Wrong login or password');

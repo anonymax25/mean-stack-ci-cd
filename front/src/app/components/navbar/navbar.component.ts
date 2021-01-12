@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
+import {environment} from '../../../environments/environment';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -8,15 +10,19 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  user: User;
 
   constructor(public authService: AuthService,
               private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.user = this.authService.getUserFromSessionStorage();
+  }
+  goToAccount() {
+    this.router.navigate([`account/${this.authService.getUserFromSessionStorage()._id}`]);
   }
 
-  goToAccount(){
-    this.router.navigate([`account/${this.authService.getUserFromSessionStorage()._id}`])
+  getImageUrl() {
+    return `${environment.apiUrl}/user/${this.user._id}/avatar`;
   }
-
 }

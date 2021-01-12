@@ -13,21 +13,18 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+  user: User;
 
-  user: User
-
-  constructor(private authService: AuthService,
-              private userService: UserService,
-              private router: Router) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.user = this.authService.getUserFromSessionStorage()
+    this.user = this.authService.getUserFromSessionStorage();
   }
 
-  getImageUrl(){
-    return `${environment.apiUrl}/user/${this.user._id}/avatar`
+  getImageUrl() {
+    return `${environment.apiUrl}/user/${this.user._id}/avatar`;
   }
 
-  
+
 
 }

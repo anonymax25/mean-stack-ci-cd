@@ -1,9 +1,9 @@
-
-<div class="card mt-5 p-2 col-md-4 offset-md-4 col-sm-10 offset-sm-1 col-xs-10 offset-xm-1">
+<button (click)="authService.logout()" class="btn btn-light">Logout</button>
+<div class="card p-2 col-md-4 offset-md-4 col-sm-10 offset-sm-1 col-xs-10 offset-xm-1">
     <h2 class="text-center">{{user.login}}'s profile</h2>
     <div class="card-body">
         <img class="img-thumbnail rounded mx-auto d-block" [src]="getImageUrl()" alt="avatar" width="300px">
-        
+
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Edit Account
@@ -17,7 +17,7 @@
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item">
-                    <h3>Reset your password:</h3> 
+                    <h3>Reset your password:</h3>
                     <span class="row-fluid">
                         <input type="text">
                         <button class="btn btn-success ml-5">Save</button>

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
-import { Observable } from 'rxjs';
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 
 @Injectable({
@@ -11,7 +10,7 @@ export class ClientGuard implements CanActivate {
   constructor(private authService: AuthService,
               private router: Router) {
   }
-  // tslint:disable-next-line:max-line-length
+
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.authService.loggedIn()) {
       this.router.navigate(['login']);
