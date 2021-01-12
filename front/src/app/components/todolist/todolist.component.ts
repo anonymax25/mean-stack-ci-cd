@@ -11,7 +11,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent {
-
   tasks: Task[] = [];
 
   taskForm: FormGroup;
@@ -33,15 +32,16 @@ export class TodolistComponent {
   }
 
   getTasks() {
-    const userId = this.authService.getUserFromSessionStorage()._id
-    this.taskService.getTasks(userId)
-      .subscribe(data => {
+    const userId = this.authService.getUserFromSessionStorage()._id;
+    this.taskService.getTasks(userId).subscribe(data => {
         this.tasks = data.sort((a, b) => {
-          if(a.datetime > b.datetime)
-            return 1
-          if(a.datetime < b.datetime)
-            return -1
-          return 0
+          if (a.datetime > b.datetime) {
+            return 1;
+          }
+          if (a.datetime < b.datetime) {
+            return -1;
+          }
+          return 0;
         });
       });
   }
@@ -57,17 +57,12 @@ export class TodolistComponent {
       return;
     }
     task.datetime = Date.parse(task.datetime)
-
     this.taskService.createTask(task).subscribe(() => this.getTasks());
-    this.resetForm();
-  }
-
-  resetForm() {
     this.taskForm.reset();
   }
 
-  taskDetail(task: Task){
-    this.router.navigate([`todo/${task._id}`])
+  taskDetail(task: Task) {
+    this.router.navigate([`todo/${task._id}`]);
   }
 
   formatDate(datetime: number): string {

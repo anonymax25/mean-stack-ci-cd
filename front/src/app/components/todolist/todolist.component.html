@@ -7,7 +7,7 @@
   <div class="card bg-light">
     <div class="card-body">
       <h5 class="card-title text-center">Add a new task in your todo list !</h5>
-      <form  [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)" (reset)="resetForm()">
+      <form  [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
         <div class="col-md-4 offset-md-4 col-sm-10 offset-sm-1">
           <div class="form-group">
             <input class="form-control" id="name" type="text" formControlName="name" placeholder="Task name">
