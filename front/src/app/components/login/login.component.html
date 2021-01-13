@@ -3,11 +3,10 @@
     <h2>Login</h2>
 
     <!-- Login Form -->
-    <form>
+    <form class="container">
       <input type="text" class="fadeIn second" id="login" required [(ngModel)]="login" name="name" placeholder="login">
-      <input type="text" class="fadeIn third" id="password" required [(ngModel)]="password" name="name" placeholder="password">
-      <button (click)="loginSubmit()" class="fadeIn fourth btn btn-primary my-2">Log In</button>
+      <input type="password" class="fadeIn third" id="password" required [(ngModel)]="password" name="name" placeholder="password">
+      <button (click)="loginSubmit()" class="fadeIn fourth btn btn-info btn-block my-3">Log In</button>
     </form>
-
   </div>
 </div>

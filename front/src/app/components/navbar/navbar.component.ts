@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(public authService: AuthService,
-              private router: Router) { }
-
-  ngOnInit(): void {
+              private router: Router) {
+    this.authService.currentUser = this.authService.getUserFromSessionStorage();
   }
 
-  goToAccount(){
-    this.router.navigate([`account/${this.authService.getUserFromSessionStorage()._id}`])
+  goToAccount() {
+    this.router.navigate([`account/${this.authService.getUserFromSessionStorage()._id}`]);
   }
 
+  getImageUrl() {
+    return `${environment.apiUrl}/user/${this.authService.currentUser._id}/avatar`;
+  }
 }

@@ -1,0 +1,15 @@
+.navbar-brand {
+  font-family: 'Indie Flower', cursive;
+  cursor: default;
+}
+
+.nav-link, img {
+  cursor: pointer;
+}
+
+img {
+  border-radius: 50%;
+  height: 33px;
+  width: 33px;
+  margin-right: 2px;
+}

@@ -7,20 +7,17 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   login: string;
   password: string;
 
   constructor(public authService: AuthService,
               private router: Router) { }
 
-  ngOnInit(): void {
-  }
-
   loginSubmit() {
     this.authService.loginCall(this.login, this.password).subscribe(user => {
       if (this.authService.errorMessage.length === 0) {
-        this.authService.setUserToSessionStorage(user)
+        this.authService.setUserToSessionStorage(user);
         this.router.navigate(['todo']);
       } else {
         alert('Wrong login or password');

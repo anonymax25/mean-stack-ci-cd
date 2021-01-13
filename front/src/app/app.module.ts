@@ -18,6 +18,7 @@ import { ImportMaterialModule } from './app.material.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { AvatarFormComponent } from './components/account/avatar-form/avatar-form.component';
 import { AccountComponent } from './components/account/account.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,7 @@ import { AccountComponent } from './components/account/account.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ImportMaterialModule,
-    OwlDateTimeModule, 
+    OwlDateTimeModule,
     OwlNativeDateTimeModule,
   ],
   providers: [],

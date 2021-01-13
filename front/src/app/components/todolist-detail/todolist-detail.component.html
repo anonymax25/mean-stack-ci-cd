@@ -1,12 +1,16 @@
 <div class="wrapper fadeInDown">
-    
-    <div id="formContent">
-        <button class="btn btn-info rounded-pill mt-3 ml-3" routerLink="todolist">Back</button>
-        <div *ngIf="task" class="p-3">
-            <p><b>id:</b> {{task._id}}</p>
-            <p><b>name:</b> {{task.name}}</p>
-            <p><b>days:</b> {{formatDate(task.datetime)}}</p>
-            <p><b>user-id:</b> {{task.user}}</p>
-        </div>
+    <div id="formContent" class="bg-dark">
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-dark mt-3 ml-3" routerLink="todolist">Back</button>
+        <button (click)="deleteTask(task)" class="btn btn-light mt-3 mr-3">Finish</button>
+      </div>
+      <div *ngIf="task" class="m-3">
+          <p class="text-light">id: {{task._id}}</p>
+          <p class="text-light">name: {{task.name}}</p>
+          <p class="text-light">days: {{formatDate(task.datetime)}}
+            <span class="badge badge-danger mx-1" *ngIf="isOverdue(task)">Overdue</span>
+          </p>
+          <p class="text-light">user-id: {{task.user}}</p>
+      </div>
     </div>
 </div>
