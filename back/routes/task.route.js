@@ -20,7 +20,7 @@ module.exports = function (app) {
         try {
             if(request.params.uid){
                 var result = await TaskModel.find({user: request.params.uid});
-                response.send(result);
+                response.status(200).send(result);
             } else {
                 response.status(400).end();
             }

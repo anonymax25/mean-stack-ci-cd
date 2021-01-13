@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -17,15 +17,16 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signupSubmit() {
-    this.authService.signupCall(this.login, this.password).subscribe(user => {
+  signUpSubmit() {
+    this.authService.signUpCall(this.login, this.password).subscribe(() => {
       if (this.authService.errorMessage.length === 0) {
-        this.router.navigate(['login']);
+        this.authService.loginCall(this.login, this.password).subscribe(user => {
+            this.authService.setUserToSessionStorage(user);
+            this.router.navigate(['todo']);
+        });
       } else {
-        alert('Couldn\'t sign up');
+        alert('Couldn\'t sign up !');
       }
     });
-
   }
-
 }
