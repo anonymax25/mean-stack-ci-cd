@@ -18,6 +18,7 @@ const requestOptions = {
 export class AuthService {
   isError = false;
   errorMessage: string;
+  currentUser: User;
 
   constructor(private http: HttpClient,
               private router: Router) {
@@ -27,8 +28,8 @@ export class AuthService {
   logout() {
     this.isError = false;
     this.errorMessage = '';
-    sessionStorage.clear();
     this.router.navigate(['login']);
+    sessionStorage.clear();
   }
 
   loginCall(login: string, password: string): Observable<User> {
@@ -65,5 +66,6 @@ export class AuthService {
 
   setUserToSessionStorage(user: User) {
     sessionStorage.setItem('user', JSON.stringify(user));
+    this.currentUser = user;
   }
 }

@@ -20,9 +20,9 @@
     <ul class="navbar-nav ml-auto">
       <li *ngIf="authService.loggedIn()" class="nav-item">
         <a class="nav-link" (click)="goToAccount()">
-          <img *ngIf="user.avatarKey" [src]="getImageUrl()" alt="avatar">
-          <img *ngIf="!user.avatarKey" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
-          {{user.login}}</a>
+          <img *ngIf="authService.currentUser.avatarKey" [src]="getImageUrl()" alt="avatar">
+          <img *ngIf="!authService.currentUser.avatarKey" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
+          {{authService.currentUser.login}}</a>
       </li>
     </ul>
   </div>
