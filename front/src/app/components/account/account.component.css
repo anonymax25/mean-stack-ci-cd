@@ -3,6 +3,19 @@ img {
   height: 300px;
   width: 300px;
 }
+
 a {
   font-size: 12px;
+}
+
+.edit {
+  color: #17a2b8;
+}
+
+.edit:hover {
+  color: #f6f6f6;
+  cursor: pointer;
+  background-color: #17a2b8;
+  border-radius: 50%;
+  padding: 7px 7px 0 7px;
 }

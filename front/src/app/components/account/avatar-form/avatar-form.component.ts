@@ -11,9 +11,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./avatar-form.component.css']
 })
 export class AvatarFormComponent implements OnInit {
-  
+
   @Input('user') user: User;
-  
+
   file: File;
   userProfileForm: FormGroup;
   progress: { percentage: number } = { percentage: 0 };
@@ -23,7 +23,7 @@ export class AvatarFormComponent implements OnInit {
   imageFileIsTooBig = false;
   selectedFileSrc: string;
   selectedFiles: FileList;
-  currentFileUpload: boolean = false
+  currentFileUpload = false;
 
   constructor(private authService: AuthService,
               private userService: UserService) { }
@@ -38,7 +38,7 @@ export class AvatarFormComponent implements OnInit {
   upload(){
     this.file = this.selectedFiles.item(0)
     if(!this.file){
-      return
+      return;
     }
     this.currentFileUpload = true
     this.progress.percentage = 0
@@ -49,10 +49,10 @@ export class AvatarFormComponent implements OnInit {
         this.user.avatarKey = event.body.avatarKey
         this.authService.setUserToSessionStorage(this.user)
         window.location.reload();
-      } 
+      }
     },
     (err) => {
-      console.log("err",err); 
+      console.log("err",err);
         this.currentFileUpload = false
     });
   }

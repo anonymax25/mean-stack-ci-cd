@@ -4,12 +4,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
-})
-export class AccountComponent implements OnInit {
+    selector: 'app-account',
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.css']
+  })
+  export class AccountComponent implements OnInit {
   user: User;
+  isEditable = false;
 
   constructor(public authService: AuthService) { }
 
