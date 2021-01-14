@@ -9,8 +9,8 @@ import { AccountComponent } from './components/account/account.component';
 
 
 const routes: Routes = [{path: '', redirectTo: 'start', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
+  {path: 'sign-in', component: LoginComponent},
+  {path: 'sign-up', component: SignupComponent},
   {path: 'todo', component: TodolistComponent, canActivate: [ClientGuard]},
   {path: 'todo/:id', component: TodolistDetailComponent, canActivate: [ClientGuard]},
   {path: 'account/:id', component: AccountComponent, canActivate: [ClientGuard]},

@@ -8,21 +8,24 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  login: string;
+  email: string;
   password: string;
 
   constructor(public authService: AuthService,
               private router: Router) { }
 
-  loginSubmit() {
-    this.authService.loginCall(this.login, this.password).subscribe(user => {
+  submit() {
+    const credential = {
+      email : this.email,
+      password : this.password
+    };
+    this.authService.signInCall(credential).subscribe(user => {
       if (this.authService.errorMessage.length === 0) {
         this.authService.setUserToSessionStorage(user);
         this.router.navigate(['todo']);
       } else {
-        alert('Wrong login or password');
+        alert('Wrong email or password');
       }
     });
   }
-
 }

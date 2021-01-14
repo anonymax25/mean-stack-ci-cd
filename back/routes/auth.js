@@ -1,36 +1,34 @@
 const bodyParser = require('body-parser');
 const User = require('../models').User;
 const Task = require('../models').Task;
-
 const SecurityUtil = require('../utils').SecuritryUtils;
 
 module.exports = function (app) {
-    app.post("/signup", bodyParser.json(), async (req, res) => {
-        if (req.body.login && req.body.password) {
+    app.post("/sign-up", bodyParser.json(), async (req, res) => {
+        if (req.body.email && req.body.password && req.body.firstName && req.body.lastName) {
             try {
                 const user = new User({
-                    login: req.body.login,
+                    email: req.body.email,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
                     password: SecurityUtil.hashPassword(req.body.password),
+                    gender: "undefined",
                     avatarKey: null
-                })
+                });
                 await user.save();
-
                 res.status(201).json(user)
             } catch (e) {
                 res.status(500).end();
             }
-
         } else {
             res.status(400).end();
         }
     });
 
-    app.get("/login/:login/:password", async (req, res) => {
-
-
-        if (req.params.login && req.params.password) {
+    app.post("/sign-in", bodyParser.json(), async (req, res) => {
+        if (req.body.email && req.body.password) {
             try {
-                const user = await User.findOne({login: req.params.login, password: SecurityUtil.hashPassword(req.params.password)})
+                const user = await User.findOne({email: req.body.email, password: SecurityUtil.hashPassword(req.body.password)})
                 if (user){
                     res.status(200).json(user);
                 } else {
@@ -39,28 +37,20 @@ module.exports = function (app) {
             } catch (e) {
                 res.status(500).end();
             }
-
         } else {
             res.status(400).end();
         }
-
-    });
-    
-    app.get("/", async (req, res) => {
-        res.status(200).json({"message": "Hello World!"});
     });
 
-
-    app.delete("/user/:login/:password", async (req, res) => {
-
-        if (req.params.login && req.params.password) {
+    app.delete("/delete/user", bodyParser.json(), async (req, res) => {
+        if (req.body.email && req.body.password) {
             try {
-                const user = await User.findOne({login: req.params.login, password: SecurityUtil.hashPassword(req.params.password)});
+                const user = await User.findOne({email: req.body.email, password: SecurityUtil.hashPassword(req.body.password)});
                 if(user != null) {
                     const result = await User.deleteOne({
-                        login: req.params.login,
+                        email: req.body.email,
                         password: SecurityUtil.hashPassword(req.params.password)
-                    })
+                    });
 
                     await Task.deleteMany({user: user._id});
 
@@ -75,11 +65,8 @@ module.exports = function (app) {
             } catch (e) {
                 res.status(500).end();
             }
-
         } else {
             res.status(400).end();
         }
-
     });
-
-}
+};

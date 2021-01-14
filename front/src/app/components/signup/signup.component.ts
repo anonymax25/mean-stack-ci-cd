@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   signUpSubmit() {
     this.authService.signUpCall(this.login, this.password).subscribe(() => {
       if (this.authService.errorMessage.length === 0) {
-        this.authService.loginCall(this.login, this.password).subscribe(user => {
+        this.authService.signInCall(this.login).subscribe(user => {
             this.authService.setUserToSessionStorage(user);
             this.router.navigate(['todo']);
         });

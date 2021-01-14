@@ -1,5 +1,5 @@
-const bodyParser = require('body-parser');
 const TaskModel = require('../models').Task;
+
 module.exports = function (app) {
     app.post("/task", async (request, response) => {
         try {

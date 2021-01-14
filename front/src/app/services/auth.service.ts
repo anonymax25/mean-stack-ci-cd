@@ -32,18 +32,18 @@ export class AuthService {
     sessionStorage.clear();
   }
 
-  loginCall(login: string, password: string): Observable<User> {
+  signInCall(credentials: any): Observable<User> {
     this.isError = false;
     this.errorMessage = '';
-    return this.http.get<any>(environment.apiUrl + '/login/' + login + '/' + password, requestOptions).pipe(
-      catchError(this.handleError<any>('login', [])));
+    return this.http.post<any>(environment.apiUrl + '/sign-in', credentials, requestOptions).pipe(
+      catchError(this.handleError<any>('sign-in', [])));
   }
 
   signUpCall(login: string, password: string) {
     this.isError = false;
     this.errorMessage = '';
-    return this.http.post<any>(environment.apiUrl + '/signup', {login, password}, requestOptions).pipe(
-      catchError(this.handleError<any>('signup', [])));
+    return this.http.post<any>(environment.apiUrl + '/sign-up', {login, password}, requestOptions).pipe(
+      catchError(this.handleError<any>('sign-up', [])));
   }
 
 

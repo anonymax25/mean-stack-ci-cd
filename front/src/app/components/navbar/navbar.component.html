@@ -7,10 +7,10 @@
     <ul class="navbar-nav">
 
       <li *ngIf="!authService.loggedIn()"class="nav-item">
-        <a class="nav-link" routerLink="login">Login</a>
+        <a class="nav-link auth" routerLink="sign-in">Sign in</a>
       </li>
       <li *ngIf="!authService.loggedIn()"class="nav-item">
-        <a class="nav-link" routerLink="signup">Sign up</a>
+        <a class="nav-link auth" routerLink="sign-up">Sign up</a>
       </li>
 
       <li *ngIf="authService.loggedIn()" class="nav-item">

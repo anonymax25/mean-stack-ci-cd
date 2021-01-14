@@ -48,4 +48,4 @@ module.exports = function (app) {
                     res.status(500).json({error:"Error -> " + err});
             }).pipe(res);
     });
-}
+};
