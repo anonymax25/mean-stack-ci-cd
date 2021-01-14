@@ -7,12 +7,20 @@ module.exports = function (app) {
     app.post("/sign-up", bodyParser.json(), async (req, res) => {
         if (req.body.email && req.body.password && req.body.firstName && req.body.lastName) {
             try {
+                let date_ob = new Date();
+                let date = ("0" + date_ob.getDate()).slice(-2);
+                let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+                let year = date_ob.getFullYear();
+                const currentDate = date + "-" + month + "-" + year;
+
                 const user = new User({
                     email: req.body.email,
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     password: SecurityUtil.hashPassword(req.body.password),
                     gender: "undefined",
+                    createDate: currentDate,
+                    verifiedEmail: false,
                     avatarKey: null
                 });
                 await user.save();

@@ -8,8 +8,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  login: string;
+  email: string;
   password: string;
+  firstName: string;
+  lastName: string;
 
   constructor(public authService: AuthService,
               private router: Router) { }
@@ -17,10 +19,21 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signUpSubmit() {
-    this.authService.signUpCall(this.login, this.password).subscribe(() => {
+  submit() {
+    const data = {
+      email: this.email,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      password: this.password
+    };
+    const credentials = {
+      email : this.email,
+      password : this.password
+    };
+
+    this.authService.signUpCall(data).subscribe(() => {
       if (this.authService.errorMessage.length === 0) {
-        this.authService.signInCall(this.login).subscribe(user => {
+        this.authService.signInCall(credentials).subscribe(user => {
             this.authService.setUserToSessionStorage(user);
             this.router.navigate(['todo']);
         });

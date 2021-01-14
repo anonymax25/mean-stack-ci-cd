@@ -1,6 +1,11 @@
 export interface User {
     _id: string;
-    login: string;
+    email: string;
+    firstName: string;
+    lastName: string;
     password: string;
+    gender: string;
+    createDate: string;
+    verifiedEmail: boolean;
     avatarKey: string;
 }

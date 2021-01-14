@@ -39,13 +39,12 @@ export class AuthService {
       catchError(this.handleError<any>('sign-in', [])));
   }
 
-  signUpCall(login: string, password: string) {
+  signUpCall(data: any) {
     this.isError = false;
     this.errorMessage = '';
-    return this.http.post<any>(environment.apiUrl + '/sign-up', {login, password}, requestOptions).pipe(
+    return this.http.post<any>(environment.apiUrl + '/sign-up', data, requestOptions).pipe(
       catchError(this.handleError<any>('sign-up', [])));
   }
-
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

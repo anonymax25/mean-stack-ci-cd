@@ -15,11 +15,11 @@ export class LoginComponent {
               private router: Router) { }
 
   submit() {
-    const credential = {
+    const credentials = {
       email : this.email,
       password : this.password
     };
-    this.authService.signInCall(credential).subscribe(user => {
+    this.authService.signInCall(credentials).subscribe(user => {
       if (this.authService.errorMessage.length === 0) {
         this.authService.setUserToSessionStorage(user);
         this.router.navigate(['todo']);

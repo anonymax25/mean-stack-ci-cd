@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SignupComponent} from "./components/signup/signup.component";
-import {LoginComponent} from "./components/login/login.component";
-import {TodolistComponent} from "./components/todolist/todolist.component";
-import {TodolistDetailComponent} from "./components/todolist-detail/todolist-detail.component";
-import {ClientGuard} from "./guards/client/client.guard";
+import {SignupComponent} from './components/signup/signup.component';
+import {LoginComponent} from './components/login/login.component';
+import {TodolistComponent} from './components/todolist/todolist.component';
+import {TodolistDetailComponent} from './components/todolist-detail/todolist-detail.component';
+import {ClientGuard} from './guards/client/client.guard';
 import { AccountComponent } from './components/account/account.component';
 
 

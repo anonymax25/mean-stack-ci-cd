@@ -4,13 +4,15 @@
 
     <!-- Login Form -->
     <form class="container">
-      <input type="text" class="fadeIn second" id="name" required [(ngModel)]="login" name="name" placeholder="login">
-      <input type="password" class="fadeIn third" id="password" required [(ngModel)]="password" name="name" placeholder="password">
-      <button (click)="signUpSubmit()" class="fadeIn fourth btn btn-info btn-block my-3" type="button">Sign up</button>
+      <input type="email" class="fadeIn second" required [(ngModel)]="email" name="email" placeholder="Email">
+      <input type="text" class="fadeIn second" required [(ngModel)]="firstName"  name="firstName" placeholder="First name">
+      <input type="text" class="fadeIn third" required [(ngModel)]="lastName" name="lastName" placeholder="Last name">
+      <input type="password" class="fadeIn third" required [(ngModel)]="password" name="password" placeholder="Password">
+      <button (click)="submit()" class="fadeIn fourth btn btn-info btn-block my-3" type="button">Sign up</button>
     </form>
-    <!-- Remind Passowrd -->
+
     <div id="formFooter">
-      <p>Sign up to our fantastic todolist app to track all your tasks</p>
+      <p>Sign up to our fantastic todo list app to track all your tasks</p>
     </div>
   </div>
 </div>

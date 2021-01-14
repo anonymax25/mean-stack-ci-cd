@@ -1,11 +1,17 @@
 <button (click)="authService.logout()" class="btn btn-dark">Logout</button>
-<div class="card p-2 col-md-4 offset-md-4 col-sm-10 offset-sm-1 col-xs-10 offset-xm-1">
+  <div class="card p-2 col-md-4 offset-md-4 col-sm-10 offset-sm-1 col-xs-10 offset-xm-1">
   <img *ngIf="user.avatarKey" class="card-img-top mx-auto d-block" [src]="getImageUrl()" alt="avatar">
   <img *ngIf="!user.avatarKey" class="card-img-top mx-auto d-block" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
-  <h3 class="text-center my-3">{{user.login}}</h3>
+  <h3 class="text-center my-3">{{user.firstName}} {{user.lastName}}</h3>
   <div class="card-body">
-    <p>Personal informations</p>
-    <p>Email : test@gmail.com</p>
+    <h5>Personal informations</h5>
+    <p> <span class="badge badge-danger mr-3" *ngIf="!user.verifiedEmail">Email not verified</span><a href="#">Verify your email here !</a></p>
+    <span class="badge badge-success mx-2" *ngIf="user.verifiedEmail">Email verified</span>
+    <p><b>Email :</b> {{user.email}}</p>
+    <p><b>First name :</b> {{user.firstName}}</p>
+    <p><b>Last name :</b> {{user.lastName}}</p>
+    <p><b>Gender :</b> {{user.gender}}</p>
+
       <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Edit Account

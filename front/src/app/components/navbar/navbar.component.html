@@ -22,7 +22,7 @@
         <a class="nav-link" (click)="goToAccount()">
           <img *ngIf="authService.currentUser.avatarKey" [src]="getImageUrl()" alt="avatar">
           <img *ngIf="!authService.currentUser.avatarKey" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
-          {{authService.currentUser.login}}</a>
+          {{authService.currentUser.firstName}}</a>
       </li>
     </ul>
   </div>
