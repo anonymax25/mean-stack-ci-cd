@@ -18,11 +18,17 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li *ngIf="authService.loggedIn()" class="nav-item">
-        <a class="nav-link" (click)="goToAccount()">
+      <li *ngIf="authService.loggedIn()" class="nav-item dropdown mr-5">
+        <a class="nav-link" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false">
           <img *ngIf="authService.currentUser.avatarKey" [src]="getImageUrl()" alt="avatar">
           <img *ngIf="!authService.currentUser.avatarKey" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
-          {{authService.currentUser.firstName}}</a>
+          {{authService.currentUser.firstName}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+          <a class="dropdown-item" (click)="goToAccount()">Profile</a>
+          <a class="dropdown-item bg-dark text-light" (click)="authService.logout()">Logout</a>
+        </div>
       </li>
     </ul>
   </div>

@@ -46,6 +46,14 @@ export class AuthService {
       catchError(this.handleError<any>('sign-up', [])));
   }
 
+  verifyCode(data: any) {
+    this.isError = false;
+    this.errorMessage = '';
+    return this.http.post<any>(environment.apiUrl + '/verification', data, requestOptions).pipe(
+      catchError(this.handleError<any>('verification-code', [])));
+  }
+
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

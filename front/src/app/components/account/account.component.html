@@ -1,5 +1,4 @@
-<button (click)="authService.logout()" class="btn btn-dark">Logout</button>
-  <div class="card">
+<div class="card">
   <img *ngIf="user.avatarKey" class="card-img-top mx-auto d-block mt-2" [src]="getImageUrl()" alt="avatar">
   <img *ngIf="!user.avatarKey" class="card-img-top mx-auto d-block mt-2" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
   <h3 class="text-center my-3">{{user.firstName}} {{user.lastName}}</h3>
@@ -16,8 +15,11 @@
           <mat-icon aria-hidden="false">camera_alt</mat-icon>
         </div>
       </div>
-      <p><span class="badge badge-danger mr-2" *ngIf="!user.verifiedEmail">Email not verified</span><a href="#">Verify your email here !</a></p>
+      <p><span class="badge badge-danger mr-2" *ngIf="!user.verifiedEmail">Email not verified</span><a
+        data-toggle="modal" data-target="#modal">Verify your email here !</a>
+      </p>
       <span class="badge badge-success mx-2" *ngIf="user.verifiedEmail">Email verified</span>
+      <p>Joined on {{user.createDate}}</p>
       <p><b>Email :</b> {{user.email}}</p>
       <p><b>First name :</b> {{user.firstName}}</p>
       <p><b>Last name :</b> {{user.lastName}}</p>
@@ -30,5 +32,32 @@
               <button class="btn btn-info mx-2">Save</button>
           </span>
       </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-danger">Delete Account</button>
+      </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter your code</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="d-flex justify-content-center">
+          <input type="email" id="code" required [(ngModel)]="code" name="code" placeholder="000111">
+        </form>
+        <p *ngIf="error" class="text-center text-danger my-2">Wrong code try again</p>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-info" (click)="submit()">Verify my email</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

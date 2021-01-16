@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     gender: String,
     createDate: String,
     verifiedEmail: Boolean,
+    verificationCode: Number,
     avatarKey: String
 });
 

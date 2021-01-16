@@ -9,18 +9,18 @@ const s3 = new aws.S3({
 });
 
 const multer = require("multer");
-var storage = multer.memoryStorage()
-var upload = multer({storage: storage});
+let storage = multer.memoryStorage()
+let upload = multer({storage: storage});
 
 module.exports = function (app) {
 
     app.put('/user/:userId/avatar', upload.single("file"), async (req, res) => {
-        const s3Key = `avatar:${req.params.userId}`
+        const s3Key = `avatar:${req.params.userId}`;
         const params = {
             Bucket: process.env.AWS_AVATAR_BUCKET,
             Key: s3Key,
             Body: req.file.buffer
-        }
+        };
         
         s3.upload(params, async (err, data) => {
             if (err) {
@@ -38,8 +38,7 @@ module.exports = function (app) {
         const params = {
             Bucket: process.env.AWS_AVATAR_BUCKET,
             Key: s3Key
-        }
-    
+        };
         res.setHeader('Content-Disposition', 'attachment');
     
         s3.getObject(params)

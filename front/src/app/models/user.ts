@@ -7,5 +7,6 @@ export interface User {
     gender: string;
     createDate: string;
     verifiedEmail: boolean;
+    verificationCode: number;
     avatarKey: string;
 }

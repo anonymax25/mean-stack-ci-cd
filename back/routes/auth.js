@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const User = require('../models').User;
 const Task = require('../models').Task;
 const SecurityUtil = require('../utils').SecuritryUtils;
+const MailerUtil = require('../utils').MailerUtils;
 
 module.exports = function (app) {
     app.post("/sign-up", bodyParser.json(), async (req, res) => {
@@ -12,6 +13,7 @@ module.exports = function (app) {
                 let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
                 let year = date_ob.getFullYear();
                 const currentDate = date + "-" + month + "-" + year;
+                const code = Math.floor(100000 + Math.random() * 900000);
 
                 const user = new User({
                     email: req.body.email,
@@ -21,9 +23,11 @@ module.exports = function (app) {
                     gender: "undefined",
                     createDate: currentDate,
                     verifiedEmail: false,
+                    verificationCode: code,
                     avatarKey: null
                 });
                 await user.save();
+                await MailerUtil.sendMailVerification(req.body.email, code);
                 res.status(201).json(user)
             } catch (e) {
                 res.status(500).end();
@@ -36,9 +40,27 @@ module.exports = function (app) {
     app.post("/sign-in", bodyParser.json(), async (req, res) => {
         if (req.body.email && req.body.password) {
             try {
-                const user = await User.findOne({email: req.body.email, password: SecurityUtil.hashPassword(req.body.password)})
+                const user = await User.findOne({email: req.body.email, password: SecurityUtil.hashPassword(req.body.password)});
                 if (user){
                     res.status(200).json(user);
+                } else {
+                    res.status(409).end();
+                }
+            } catch (e) {
+                res.status(500).end();
+            }
+        } else {
+            res.status(400).end();
+        }
+    });
+
+    app.post("/verification", bodyParser.json(), async (req, res) => {
+        if (req.body.email && req.body.verificationCode) {
+            try {
+                const user = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
+                    {$set: { verifiedEmail: true } });
+                if (user){
+                    res.status(204).end();
                 } else {
                     res.status(409).end();
                 }
