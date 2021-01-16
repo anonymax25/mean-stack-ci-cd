@@ -27,7 +27,7 @@ module.exports = function (app) {
                     avatarKey: null
                 });
                 await user.save();
-                await MailerUtil.sendMailVerification(req.body.email, code);
+                await MailerUtil.sendMailVerification(req.body.email, code, false);
                 res.status(201).json(user)
             } catch (e) {
                 res.status(500).end();
@@ -41,7 +41,7 @@ module.exports = function (app) {
         if (req.body.email && req.body.password) {
             try {
                 const user = await User.findOne({email: req.body.email, password: SecurityUtil.hashPassword(req.body.password)});
-                if (user){
+                if (user) {
                     res.status(200).json(user);
                 } else {
                     res.status(409).end();
@@ -59,7 +59,45 @@ module.exports = function (app) {
             try {
                 const user = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
                     {$set: { verifiedEmail: true } });
-                if (user){
+                if (user) {
+                    res.status(204).end();
+                } else {
+                    res.status(409).end();
+                }
+            } catch (e) {
+                res.status(500).end();
+            }
+        } else {
+            res.status(400).end();
+        }
+    });
+
+    app.post("/reset-password", bodyParser.json(), async (req, res) => {
+        if (req.body.email && req.body.password && req.body.verificationCode) {
+            try {
+                const user = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
+                    {$set: { password: SecurityUtil.hashPassword(req.body.password) } });
+                if (user) {
+                    res.status(204).end();
+                } else {
+                    res.status(409).end();
+                }
+            } catch (e) {
+                res.status(500).end();
+            }
+        } else {
+            res.status(400).end();
+        }
+    });
+
+    app.post( "/send/email", bodyParser.json(), async (req, res) => {
+        if (req.body.email) {
+            try {
+                const code = Math.floor(100000 + Math.random() * 900000);
+                const user = await User.updateOne({email: req.body.email},
+                    {$set: { verificationCode: code } });
+                if (user) {
+                    await MailerUtil.sendMailVerification(req.body.email, code, true);
                     res.status(204).end();
                 } else {
                     res.status(409).end();

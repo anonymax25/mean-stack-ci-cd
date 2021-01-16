@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class LoginComponent {
   email: string;
   password: string;
+  error = false;
 
   constructor(public authService: AuthService,
               private router: Router) { }
@@ -24,8 +25,12 @@ export class LoginComponent {
         this.authService.setUserToSessionStorage(user);
         this.router.navigate(['todo']);
       } else {
-        alert('Wrong email or password');
+        this.error = true;
       }
     });
+  }
+
+  goToResetComponent() {
+    this.router.navigate(['reset-password']);
   }
 }

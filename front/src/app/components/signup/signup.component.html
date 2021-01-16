@@ -1,16 +1,18 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <h2>Sign up !</h2>
+    <h2>Inscription</h2>
 
     <!-- Login Form -->
     <form class="container">
-      <input type="email" class="fadeIn second" required [(ngModel)]="email" name="email" placeholder="Email">
-      <input type="text" class="fadeIn second" required [(ngModel)]="firstName"  name="firstName" placeholder="First name">
-      <input type="text" class="fadeIn third" required [(ngModel)]="lastName" name="lastName" placeholder="Last name">
-      <input type="password" class="fadeIn third" required [(ngModel)]="password" name="password" placeholder="Password">
-      <button (click)="submit()" class="fadeIn fourth btn btn-info btn-block my-3" type="button">Sign up</button>
+      <input type="email" class="fadeIn second" required [(ngModel)]="email" name="email" placeholder="Adresse e-mail">
+      <input type="text" class="fadeIn third" required [(ngModel)]="lastName" name="lastName" placeholder="Nom">
+      <input type="text" class="fadeIn second" required [(ngModel)]="firstName"  name="firstName" placeholder="Prénom">
+      <input type="password" class="fadeIn third" required [(ngModel)]="password" name="password" placeholder="Mot de passe">
+      <button (click)="submit()" class="fadeIn fourth btn btn-info btn-block my-3" type="button">Inscription</button>
     </form>
-
+    <small class="alert alert-danger" *ngIf="error" role="alert">
+      Un des champs est vide ou incorrect !
+    </small>
     <div id="formFooter">
       <p>Sign up to our fantastic todo list app to track all your tasks</p>
     </div>

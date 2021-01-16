@@ -5,31 +5,32 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-
-      <li *ngIf="!authService.loggedIn()"class="nav-item">
-        <a class="nav-link auth" routerLink="sign-in">Sign in</a>
-      </li>
-      <li *ngIf="!authService.loggedIn()"class="nav-item">
-        <a class="nav-link auth" routerLink="sign-up">Sign up</a>
-      </li>
-
       <li *ngIf="authService.loggedIn()" class="nav-item">
-        <a class="nav-link" routerLink="todo">Todo list</a>
+        <a class="nav-link" routerLink="todo">Accueil</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li *ngIf="authService.loggedIn()" class="nav-item dropdown mr-5">
+      <li *ngIf="!authService.loggedIn()"class="nav-item mr-3">
+        <a class="nav-link" routerLink="sign-in">Connexion</a>
+      </li>
+      <li *ngIf="!authService.loggedIn()"class="nav-item">
+        <a class="btn btn-info" routerLink="sign-up">Se créer un compte</a>
+      </li>
+      <li *ngIf="authService.loggedIn()" class="nav-item dropdown">
         <a class="nav-link" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
           <img *ngIf="authService.currentUser.avatarKey" [src]="getImageUrl()" alt="avatar">
           <img *ngIf="!authService.currentUser.avatarKey" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
           {{authService.currentUser.firstName}}
         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-          <a class="dropdown-item" (click)="goToAccount()">Profile</a>
-          <a class="dropdown-item bg-dark text-light" (click)="authService.logout()">Logout</a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
+          <a class="dropdown-item" (click)="goToAccount()">Profil</a>
+          <a class="dropdown-item" (click)="goToResetPassword()">Scécurité</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="authService.logout()">Deconnexion</a>
         </div>
       </li>
     </ul>
   </div>
 </nav>
+

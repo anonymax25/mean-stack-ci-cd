@@ -7,17 +7,14 @@ import {Router} from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
-
+  error = false;
   constructor(public authService: AuthService,
               private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   submit() {
     const data = {
@@ -38,7 +35,7 @@ export class SignupComponent implements OnInit {
             this.router.navigate(['todo']);
         });
       } else {
-        alert('Couldn\'t sign up !');
+        this.error = true;
       }
     });
   }

@@ -19,7 +19,7 @@ export class TodolistComponent {
 
   constructor(private taskService: TaskService,
               private formBuilder: FormBuilder,
-              private authService: AuthService,
+              public authService: AuthService,
               private router: Router) {
     this.getTasks();
     this.nameCtrl = formBuilder.control('', Validators.required);
@@ -71,5 +71,9 @@ export class TodolistComponent {
 
   isOverdue(task: Task): boolean {
     return task.datetime < Date.now();
+  }
+
+  goToAccount() {
+    this.router.navigate([`account/${this.authService.getUserFromSessionStorage()._id}`]);
   }
 }

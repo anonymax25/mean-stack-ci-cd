@@ -15,23 +15,16 @@
           <mat-icon aria-hidden="false">camera_alt</mat-icon>
         </div>
       </div>
-      <p><span class="badge badge-danger mr-2" *ngIf="!user.verifiedEmail">Email not verified</span><a
+      <p *ngIf="!user.verifiedEmail"><span class="badge badge-danger mr-2">Email not verified</span><a
         data-toggle="modal" data-target="#modal">Verify your email here !</a>
       </p>
-      <span class="badge badge-success mx-2" *ngIf="user.verifiedEmail">Email verified</span>
+      <p class="badge badge-success" *ngIf="user.verifiedEmail">Email verified</p>
       <p>Joined on {{user.createDate}}</p>
       <p><b>Email :</b> {{user.email}}</p>
       <p><b>First name :</b> {{user.firstName}}</p>
       <p><b>Last name :</b> {{user.lastName}}</p>
       <p><b>Gender :</b> {{user.gender}}</p>
       <hr>
-      <div class="d-flex justify-content-start">
-        <p><b>Reset password :</b></p>
-          <span class="row-fluid mx-2">
-              <input type="text">
-              <button class="btn btn-info mx-2">Save</button>
-          </span>
-      </div>
       <div class="d-flex justify-content-end">
         <button class="btn btn-danger">Delete Account</button>
       </div>

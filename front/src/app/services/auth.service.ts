@@ -53,6 +53,19 @@ export class AuthService {
       catchError(this.handleError<any>('verification-code', [])));
   }
 
+  sendCode(data: any) {
+    this.isError = false;
+    this.errorMessage = '';
+    return this.http.post<any>(environment.apiUrl + '/send/email', data, requestOptions).pipe(
+      catchError(this.handleError<any>('send-code', [])));
+  }
+
+  resetPassword(data: any) {
+    this.isError = false;
+    this.errorMessage = '';
+    return this.http.post<any>(environment.apiUrl + '/reset-password', data, requestOptions).pipe(
+      catchError(this.handleError<any>('reset-password', [])));
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
