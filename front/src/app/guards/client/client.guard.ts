@@ -13,7 +13,7 @@ export class ClientGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.authService.loggedIn()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['sign-in']);
       return false;
     }
     return true;

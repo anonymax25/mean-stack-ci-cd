@@ -1,7 +1,21 @@
 .content {
-    margin: 2px; 
+    margin: 2px;
 }
 
 .task-name {
     font-size: 24px;
+}
+
+.alert {
+  cursor: default;
+}
+
+a {
+  color: #007bff;
+}
+
+a:hover {
+  color: #007bff;
+  cursor: pointer;
+  border-bottom: 1.2px solid #007bff;
 }

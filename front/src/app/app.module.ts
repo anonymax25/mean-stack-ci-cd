@@ -18,6 +18,8 @@ import { ImportMaterialModule } from './app.material.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { AvatarFormComponent } from './components/account/avatar-form/avatar-form.component';
 import { AccountComponent } from './components/account/account.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AccountComponent } from './components/account/account.component';
     TodolistDetailComponent,
     NavbarComponent,
     AccountComponent,
-    AvatarFormComponent
+    AvatarFormComponent,
+    ResetPasswordComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
