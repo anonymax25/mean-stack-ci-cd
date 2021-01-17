@@ -4,52 +4,78 @@
   <h3 class="text-center my-3">{{user.firstName}} {{user.lastName}}</h3>
   <div class="card-body">
     <div *ngIf="isEditable" class="d-flex justify-content-between mb-2">
-      <div><b class="mr-2">Change your avatar :</b>
+      <div><b class="mr-2">Change ton image de profil :</b>
         <app-avatar-form [user]="user"></app-avatar-form>
       </div>
-      <button class="btn btn-light" (click)="isEditable = false" *ngIf="isEditable">cancel</button>
+      <button class="btn btn-light" (click)="isEditable = false" *ngIf="isEditable">Annuler</button>
     </div>
       <div class="d-flex justify-content-between">
-        <h5>Personal information</h5>
+        <h5>Informations personnel</h5>
         <div class="edit" (click)="isEditable = true" *ngIf="!isEditable">
           <mat-icon aria-hidden="false">camera_alt</mat-icon>
         </div>
       </div>
-      <p *ngIf="!user.verifiedEmail"><span class="badge badge-danger mr-2">Email not verified</span><a
-        data-toggle="modal" data-target="#modal">Verify your email here !</a>
+      <p *ngIf="!user.verifiedEmail"><span class="badge badge-danger mr-2">Adresse e-mail non vérifié</span><a
+        data-toggle="modal" data-target="#modal">Vérifie ton e-mail ici !</a>
       </p>
-      <p class="badge badge-success" *ngIf="user.verifiedEmail">Email verified</p>
-      <p>Joined on {{user.createDate}}</p>
-      <p><b>Email :</b> {{user.email}}</p>
-      <p><b>First name :</b> {{user.firstName}}</p>
-      <p><b>Last name :</b> {{user.lastName}}</p>
-      <p><b>Gender :</b> {{user.gender}}</p>
+      <p class="badge badge-success" *ngIf="user.verifiedEmail">Adresse e-mail vérifié</p>
+      <p>A rejoint le {{user.createDate}}</p>
+      <p><b>Adresse e-mail :</b> {{user.email}}</p>
+      <p><b>Prénom :</b> {{user.firstName}}</p>
+      <p><b>Nom :</b> {{user.lastName}}</p>
+      <p><b>Sexe :</b> {{user.gender}}</p>
       <hr>
       <div class="d-flex justify-content-end">
-        <button class="btn btn-danger">Delete Account</button>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Suprimer le compte</button>
       </div>
   </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter your code</h5>
+        <h5 class="modal-title" id="modalLabel">Enter your code</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form class="d-flex justify-content-center">
-          <input type="email" id="code" required [(ngModel)]="code" name="code" placeholder="000111">
+          <input type="email" class="form-control" id="code" required [(ngModel)]="code" name="code" placeholder="000111">
         </form>
-        <p *ngIf="error" class="text-center text-danger my-2">Wrong code try again</p>
+        <p *ngIf="error" class="text-center text-danger my-2">Le code est incorrect !</p>
       </div>
       <div class="modal-footer d-flex justify-content-between">
-        <button type="button" class="btn btn-info" (click)="submit()">Verify my email</button>
-        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" (click)="submit()">Valider</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Suppréssion du compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Vous êtes sur le point de supprimer votre compte TodoList App !</p>
+        <p>Cette action est irréversible.</p>
+        <p>Entrer votre mot de passe puis cliquer sur suppirmer.</p>
+        <form class="d-flex justify-content-center">
+          <input type="password" class="form-control" id="password" required [(ngModel)]="pwd" name="password" placeholder="mot de passe">
+        </form>
+        <p *ngIf="error" class="text-center text-danger my-2">Le mot de passe est incorrect !</p>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-danger" (click)="deleteAccount()">Supprimer</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">Annuler</button>
       </div>
     </div>
   </div>

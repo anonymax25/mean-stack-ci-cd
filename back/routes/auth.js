@@ -57,14 +57,15 @@ module.exports = function (app) {
     app.post("/verification", bodyParser.json(), async (req, res) => {
         if (req.body.email && req.body.verificationCode) {
             try {
-                const user = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
+                const result = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
                     {$set: { verifiedEmail: true } });
-                if (user) {
+                if (result['nModified'] === 1) {
                     res.status(204).end();
                 } else {
                     res.status(409).end();
                 }
             } catch (e) {
+                console.log(e);
                 res.status(500).end();
             }
         } else {
@@ -75,9 +76,9 @@ module.exports = function (app) {
     app.post("/reset-password", bodyParser.json(), async (req, res) => {
         if (req.body.email && req.body.password && req.body.verificationCode) {
             try {
-                const user = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
+                const result = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
                     {$set: { password: SecurityUtil.hashPassword(req.body.password) } });
-                if (user) {
+                if (result['nModified'] === 1) {
                     res.status(204).end();
                 } else {
                     res.status(409).end();
@@ -110,15 +111,16 @@ module.exports = function (app) {
         }
     });
 
-    app.delete("/delete/user", bodyParser.json(), async (req, res) => {
-        if (req.body.email && req.body.password) {
+    app.delete("/user/:login/:password", async (req, res) => {
+
+        if (req.params.login && req.params.password) {
             try {
-                const user = await User.findOne({email: req.body.email, password: SecurityUtil.hashPassword(req.body.password)});
+                const user = await User.findOne({login: req.params.login, password: SecurityUtil.hashPassword(req.params.password)});
                 if(user != null) {
                     const result = await User.deleteOne({
-                        email: req.body.email,
+                        login: req.params.login,
                         password: SecurityUtil.hashPassword(req.params.password)
-                    });
+                    })
 
                     await Task.deleteMany({user: user._id});
 
@@ -133,6 +135,7 @@ module.exports = function (app) {
             } catch (e) {
                 res.status(500).end();
             }
+
         } else {
             res.status(400).end();
         }

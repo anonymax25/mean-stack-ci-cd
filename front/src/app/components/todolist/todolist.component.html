@@ -16,23 +16,23 @@
 
 <div class="card bg-light">
   <div class="card-body">
-    <h5 class="card-title text-center">Add a new task in your todo list !</h5>
-    <form  [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
+    <h5 class="card-title text-center">Ajouter une nouvelle tâche à votre liste !</h5>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
       <div class="col-md-4 offset-md-4 col-sm-10 offset-sm-1">
         <div class="form-group">
-          <input class="form-control" id="name" type="text" formControlName="name" placeholder="Task name">
+          <input class="form-control" id="name" type="text" formControlName="name" placeholder="Libélé de la tâche">
           <small class="text-danger" *ngIf="nameCtrl.touched && nameCtrl.hasError('required')">
-            Name is required !
+            Le libélé est obligatoire !
           </small>
         </div>
         <div class="form-group">
-          <input class="form-control" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time" formControlName="datetime">
+          <input class="form-control" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date de rendue" formControlName="datetime">
           <small class="text-danger" *ngIf="datetime.touched && datetime.hasError('required')">
-            Date is required !
+            La data est obligatoire !
           </small>
           <owl-date-time #dt1></owl-date-time>
         </div>
-        <button class="btn btn-info btn-block" type="submit" [disabled]="taskForm.invalid">Add task</button>
+        <button class="btn btn-info btn-block" type="submit" [disabled]="taskForm.invalid">Ajouter la tâche</button>
       </div>
     </form>
   </div>
@@ -42,12 +42,12 @@
   <div class="card bg-dark my-3">
     <div class="card-body">
         <p class="card-text text-light">
-          <b class="task-name">{{task.name }}</b> due <i>{{formatDate(task.datetime)}}</i>
-          <span class="badge badge-danger mx-2" *ngIf="isOverdue(task)">Overdue</span>
+          <b class="task-name">{{task.name }}</b> à faire pour le {{formatDate(task.datetime)}}
+          <span class="badge badge-danger mx-2" *ngIf="isOverdue(task)">Date dépassé</span>
         </p>
       <div class="d-flex justify-content-between">
-        <button (click)="taskDetail(task)" class="btn btn-info mr-2">Detail</button>
-        <button (click)="deleteTask(task)" class="btn btn-light">Finish</button>
+        <button (click)="taskDetail(task)" class="btn btn-info mr-2">Détail</button>
+        <button (click)="deleteTask(task)" class="btn btn-light">Terminer</button>
       </div>
     </div>
   </div>

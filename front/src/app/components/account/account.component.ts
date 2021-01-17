@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
   isEditable = false;
   code: number;
   error = false;
+  pwd: string;
 
   constructor(public authService: AuthService) { }
 
@@ -25,16 +26,42 @@ import { environment } from 'src/environments/environment';
   }
 
   submit() {
+    this.error = false;
     const data = {
       verificationCode: this.code,
       email: this.authService.currentUser.email
     };
     this.authService.verifyCode(data).subscribe(() => {
       if (this.authService.errorMessage.length === 0) {
+        const user = {
+          _id: this.authService.currentUser._id,
+          email: this.authService.currentUser.email,
+          password: this.authService.currentUser.password,
+          firstName: this.authService.currentUser.firstName,
+          lastName: this.authService.currentUser.lastName,
+          gender: this.authService.currentUser.gender,
+          createDate: this.authService.currentUser.createDate,
+          verifiedEmail: true,
+          verificationCode: this.authService.currentUser.verificationCode,
+          avatarKey: this.authService.currentUser.avatarKey
+        };
+        this.authService.setUserToSessionStorage(user);
         window.location.reload();
       } else {
         this.error = true;
       }
     });
+  }
+
+  deleteAccount() {
+    this.error = false;
+    if (this.pwd !== null && this.pwd !== undefined && this.pwd !== '') {
+      this.authService.deleteAccount(this.pwd).subscribe(() => {
+        this.authService.logout();
+        window.location.reload();
+      });
+    } else  {
+      this.error = true;
+    }
   }
 }

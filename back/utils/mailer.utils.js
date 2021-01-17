@@ -27,7 +27,7 @@ class MailerUtils {
                 ${code}
               
                 Do not reply to this email address, the messages won't be replied to.
-                Sincerly yours,
+                Sincerely yours,
                 The TodoList App Team.
              `
             }
@@ -37,13 +37,12 @@ class MailerUtils {
                 to: userEmail,
                 subject: "TodoList App - Account Verification",
                 text: `
-                If you have no connection to Move up please ignore this e-mail.
-                You have requested a new password, and here it is:
+                If you have no connection to TodoList App, please ignore this e-mail.
+                You have requested a new password, and here it is the verification code:
                 ${code}
                 
-                We recommend that you use this password temporarily and change it as you wish, when logged in.
                 Do not reply to this email address, the messages won't be replied to.
-                Sincerly yours,
+                Sincerely yours,
                 The TodoList App Team.
              `
             };

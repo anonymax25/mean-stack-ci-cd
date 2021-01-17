@@ -67,6 +67,14 @@ export class AuthService {
       catchError(this.handleError<any>('reset-password', [])));
   }
 
+  deleteAccount(password: string) {
+    this.isError = false;
+    this.errorMessage = '';
+    return this.http.delete<any>(environment.apiUrl + '/user/' + this.currentUser.email + '/' +
+      password, requestOptions).pipe(
+      catchError(this.handleError<any>('reset-password', [])));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
