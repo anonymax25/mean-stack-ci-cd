@@ -60,7 +60,6 @@ module.exports = function (app) {
                 const user = await User.findOne({email: req.body.email, verificationCode: req.body.verificationCode});
                 const result = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
                     {$set: { verifiedEmail: true } });
-                console.log(user);
                 if (result['nModified'] === 1 || user) {
                     res.status(204).end();
                 } else {
