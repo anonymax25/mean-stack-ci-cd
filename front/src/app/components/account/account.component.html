@@ -3,31 +3,33 @@
   <img *ngIf="!user.avatarKey" class="card-img-top mx-auto d-block mt-2" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
   <h3 class="text-center my-3">{{user.firstName}} {{user.lastName}}</h3>
   <div class="card-body">
+
     <div *ngIf="isEditable" class="d-flex justify-content-between mb-2">
       <div><b class="mr-2">Change ton image de profil :</b>
         <app-avatar-form [user]="user"></app-avatar-form>
       </div>
       <button class="btn btn-light" (click)="isEditable = false" *ngIf="isEditable">Annuler</button>
     </div>
-      <div class="d-flex justify-content-between">
-        <h5>Informations personnel</h5>
-        <div class="edit" (click)="isEditable = true" *ngIf="!isEditable">
-          <mat-icon aria-hidden="false">camera_alt</mat-icon>
-        </div>
+
+    <div class="d-flex justify-content-between">
+      <h5>Informations personnel</h5>
+      <div class="edit" (click)="isEditable = true" *ngIf="!isEditable">
+        <mat-icon aria-hidden="false">camera_alt</mat-icon>
       </div>
-      <p *ngIf="!user.verifiedEmail"><span class="badge badge-danger mr-2">Adresse e-mail non vérifié</span><a
-        data-toggle="modal" data-target="#modal">Vérifie ton e-mail ici !</a>
-      </p>
-      <p class="badge badge-success" *ngIf="user.verifiedEmail">Adresse e-mail vérifié</p>
-      <p>A rejoint le {{user.createDate}}</p>
-      <p><b>Adresse e-mail :</b> {{user.email}}</p>
-      <p><b>Prénom :</b> {{user.firstName}}</p>
-      <p><b>Nom :</b> {{user.lastName}}</p>
-      <p><b>Sexe :</b> {{user.gender}}</p>
-      <hr>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Suprimer le compte</button>
-      </div>
+    </div>
+    <p *ngIf="!user.verifiedEmail"><span class="badge badge-danger mr-2">Adresse e-mail non vérifié</span><a
+      data-toggle="modal" data-target="#modal">Vérifie ton e-mail ici !</a>
+    </p>
+    <p class="badge badge-success" *ngIf="user.verifiedEmail">Adresse e-mail vérifié</p>
+    <p>A rejoint le {{user.createDate}}</p>
+    <p><b>Adresse e-mail :</b> {{user.email}}</p>
+    <p><b>Prénom :</b> {{user.firstName}}</p>
+    <p><b>Nom :</b> {{user.lastName}}</p>
+    <p><b>Sexe :</b> {{user.gender}}</p>
+    <hr>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Suprimer le compte</button>
+    </div>
   </div>
 </div>
 
