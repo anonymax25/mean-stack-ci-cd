@@ -13,3 +13,14 @@ img {
   width: 33px;
   margin-right: 2px;
 }
+
+.auth {
+  border-radius: 5%;
+  border: 2px solid #5f5e5a;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
+}

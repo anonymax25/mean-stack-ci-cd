@@ -7,25 +7,35 @@ import {Router} from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
-  login: string;
+export class SignupComponent {
+  email: string;
   password: string;
-
+  firstName: string;
+  lastName: string;
+  error = false;
   constructor(public authService: AuthService,
               private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  submit() {
+    const data = {
+      email: this.email,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      password: this.password
+    };
+    const credentials = {
+      email : this.email,
+      password : this.password
+    };
 
-  signUpSubmit() {
-    this.authService.signUpCall(this.login, this.password).subscribe(() => {
+    this.authService.signUpCall(data).subscribe(() => {
       if (this.authService.errorMessage.length === 0) {
-        this.authService.loginCall(this.login, this.password).subscribe(user => {
+        this.authService.signInCall(credentials).subscribe(user => {
             this.authService.setUserToSessionStorage(user);
             this.router.navigate(['todo']);
         });
       } else {
-        alert('Couldn\'t sign up !');
+        this.error = true;
       }
     });
   }

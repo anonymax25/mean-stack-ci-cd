@@ -19,6 +19,10 @@ export class NavbarComponent {
     this.router.navigate([`account/${this.authService.getUserFromSessionStorage()._id}`]);
   }
 
+  goToResetPassword() {
+    this.router.navigate(['reset-password']);
+  }
+
   getImageUrl() {
     return `${environment.apiUrl}/user/${this.authService.currentUser._id}/avatar`;
   }
