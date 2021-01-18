@@ -20,6 +20,8 @@ export class LoginComponent {
       email : this.email,
       password : this.password
     };
+    this.authService.resetError()
+    this.error = false
     this.authService.signInCall(credentials).subscribe(user => {
       if (this.authService.errorMessage.length === 0) {
         this.authService.setUserToSessionStorage(user);

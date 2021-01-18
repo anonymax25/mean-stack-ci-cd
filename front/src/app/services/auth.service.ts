@@ -96,4 +96,9 @@ export class AuthService {
     sessionStorage.setItem('user', JSON.stringify(user));
     this.currentUser = user;
   }
+
+  resetError() {
+    this.errorMessage = ''
+    this.isError = false
+  }
 }
