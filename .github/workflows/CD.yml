@@ -18,4 +18,4 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: cd ./CICD-4AL && ./deploy-todo.sh
+          script: ./deploy-todo.sh

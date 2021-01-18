@@ -57,9 +57,10 @@ module.exports = function (app) {
     app.post("/verification", bodyParser.json(), async (req, res) => {
         if (req.body.email && req.body.verificationCode) {
             try {
+                const user = await User.findOne({email: req.body.email, verificationCode: req.body.verificationCode});
                 const result = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
                     {$set: { verifiedEmail: true } });
-                if (result['nModified'] === 1) {
+                if (result['nModified'] === 1 || user) {
                     res.status(204).end();
                 } else {
                     res.status(409).end();
