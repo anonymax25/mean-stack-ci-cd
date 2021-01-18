@@ -28,7 +28,7 @@ export class AuthService {
   logout() {
     this.isError = false;
     this.errorMessage = '';
-    this.router.navigate(['login']);
+    this.router.navigate(['sign-in']);
     sessionStorage.clear();
   }
 
