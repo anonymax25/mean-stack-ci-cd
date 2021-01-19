@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-  #pull_request:
-  #  types: [closed]
 jobs:
   ssh-deploy:
     #if: github.event.pull_request.merged == true
