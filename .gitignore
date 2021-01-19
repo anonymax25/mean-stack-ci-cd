@@ -1,5 +1,4 @@
 *node_modules*
-#back/.env
+back/.env
 ./database
 .idea/*
-#.env

@@ -68,6 +68,8 @@ export class AuthService {
   }
 
   deleteAccount(password: string) {
+    console.log(this.currentUser.email);
+    console.log(password);
     this.isError = false;
     this.errorMessage = '';
     return this.http.delete<any>(environment.apiUrl + '/user/' + this.currentUser.email + '/' +
@@ -99,6 +101,6 @@ export class AuthService {
 
   resetError() {
     this.errorMessage = ''
-    this.isError = false
+    this.isError = false;
   }
 }

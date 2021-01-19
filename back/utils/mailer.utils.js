@@ -1,53 +1,52 @@
 const nodemailer = require('nodemailer');
 
 class MailerUtils {
-
     static async sendMailVerification(userEmail, code, isPwdReset) {
         let message;
 
         const transporter = nodemailer.createTransport({
-            host: "email-smtp.eu-west-1.amazonaws.com",
+            host: process.env.AWS_SMTP_HOST,
             secure: false,
-            port: 587,
+            port: process.env.AWS_SMTP_PORT,
             auth: {
-                user: "AKIARWBNM4HMCDTT4EMS",
-                pass: "BM/D6JlH2p6O0BkMs6OyzhsuCJerLJkBkLXvcfBYp9Qz"
+                user: process.env.AWS_SMTP_USERNAME,
+                pass: process.env.AWS_SMTP_PASSWORD
             }
         });
 
-        if(isPwdReset == false) {
+        if(isPwdReset === false) {
             message = {
-                from: "julien1105@outlook.fr",
+                from: process.env.AWS_SMTP_ADDRESS,
                 to: userEmail,
-                subject: "TodoList App - Account Verification",
+                subject: "Todo List App - Account Verification",
                 text: `
-                Welcome to TodoList App
+                Welcome to Todo List App !
                 You create a account in our application.
                 Enter the following code in your profile.
                 ${code}
               
-                Do not reply to this email address, the messages won't be replied to.
+                Do not reply to this e-mail address, the messages won't be replied to.
                 Sincerely yours,
-                The TodoList App Team.
+                The Todo List App Team.
              `
             }
         }else {
             message = {
-                from: "julien1105@outlook.fr",
+                from: process.env.AWS_SMTP_ADDRESS,
                 to: userEmail,
-                subject: "TodoList App - Account Verification",
+                subject: "Todo List App - Reset Password",
                 text: `
-                If you have no connection to TodoList App, please ignore this e-mail.
+                If you don't request a new password for Todo List App, please ignore this e-mail.
+                
                 You have requested a new password, and here it is the verification code:
                 ${code}
                 
-                Do not reply to this email address, the messages won't be replied to.
+                Do not reply to this e-mail address, the messages won't be replied to.
                 Sincerely yours,
                 The TodoList App Team.
              `
             };
         }
-
         await transporter.sendMail(message,(err, info) => {
             if(err) {
                 console.log(err);
