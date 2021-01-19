@@ -20,7 +20,7 @@ module.exports = function (app) {
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     password: SecurityUtil.hashPassword(req.body.password),
-                    gender: "undefined",
+                    gender: null,
                     createDate: currentDate,
                     verifiedEmail: false,
                     verificationCode: code,
@@ -60,13 +60,12 @@ module.exports = function (app) {
                 const user = await User.findOne({email: req.body.email, verificationCode: req.body.verificationCode});
                 const result = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
                     {$set: { verifiedEmail: true } });
-                if (result['nModified'] === 1 || user) {
+                if (result.nModified === 1 || user) {
                     res.status(204).end();
                 } else {
                     res.status(409).end();
                 }
             } catch (e) {
-                console.log(e);
                 res.status(500).end();
             }
         } else {
@@ -79,7 +78,7 @@ module.exports = function (app) {
             try {
                 const result = await User.updateOne({email: req.body.email, verificationCode: req.body.verificationCode},
                     {$set: { password: SecurityUtil.hashPassword(req.body.password) } });
-                if (result['nModified'] === 1) {
+                if (result.nModified === 1) {
                     res.status(204).end();
                 } else {
                     res.status(409).end();
@@ -105,6 +104,7 @@ module.exports = function (app) {
                     res.status(409).end();
                 }
             } catch (e) {
+                console.log(e);
                 res.status(500).end();
             }
         } else {
@@ -112,31 +112,28 @@ module.exports = function (app) {
         }
     });
 
-    app.delete("/user/:login/:password", async (req, res) => {
+    app.delete("/user/:email/:password", async (req, res) => {
 
-        if (req.params.login && req.params.password) {
+        if (req.params.email && req.params.password) {
             try {
-                const user = await User.findOne({login: req.params.login, password: SecurityUtil.hashPassword(req.params.password)});
-                if(user != null) {
-                    const result = await User.deleteOne({
-                        login: req.params.login,
-                        password: SecurityUtil.hashPassword(req.params.password)
-                    })
-
+                const user = await User.findOne({email: req.params.email, password: SecurityUtil.hashPassword(req.params.password)});
+                if(user) {
                     await Task.deleteMany({user: user._id});
-
+                    const result = await User.deleteOne({
+                        email: req.params.email,
+                        password: SecurityUtil.hashPassword(req.params.password)
+                    });
                     if (result.deletedCount === 1) {
                         res.status(204).end();
                     } else {
                         res.status(404).end();
                     }
-                }else{
+                } else{
                     res.status(404).end();
                 }
             } catch (e) {
                 res.status(500).end();
             }
-
         } else {
             res.status(400).end();
         }

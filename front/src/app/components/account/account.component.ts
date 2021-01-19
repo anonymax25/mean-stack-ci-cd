@@ -57,8 +57,12 @@ import { environment } from 'src/environments/environment';
     this.error = false;
     if (this.pwd !== null && this.pwd !== undefined && this.pwd !== '') {
       this.authService.deleteAccount(this.pwd).subscribe(() => {
-        this.authService.logout();
-        window.location.reload();
+        if (this.authService.errorMessage.length === 0) {
+          this.authService.logout();
+          window.location.reload();
+        } else {
+          this.error = true;
+        }
       });
     } else  {
       this.error = true;
