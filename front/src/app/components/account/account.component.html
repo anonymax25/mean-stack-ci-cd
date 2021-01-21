@@ -3,31 +3,33 @@
   <img *ngIf="!user.avatarKey" class="card-img-top mx-auto d-block mt-2" src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
   <h3 class="text-center my-3">{{user.firstName}} {{user.lastName}}</h3>
   <div class="card-body">
+
     <div *ngIf="isEditable" class="d-flex justify-content-between mb-2">
       <div><b class="mr-2">Change ton image de profil :</b>
         <app-avatar-form [user]="user"></app-avatar-form>
       </div>
       <button class="btn btn-light" (click)="isEditable = false" *ngIf="isEditable">Annuler</button>
     </div>
-      <div class="d-flex justify-content-between">
-        <h5>Informations personnel</h5>
-        <div class="edit" (click)="isEditable = true" *ngIf="!isEditable">
-          <mat-icon aria-hidden="false">camera_alt</mat-icon>
-        </div>
+
+    <div class="d-flex justify-content-between">
+      <h5>Informations personnelles</h5>
+      <div class="edit" (click)="isEditable = true" *ngIf="!isEditable">
+        <mat-icon aria-hidden="false">camera_alt</mat-icon>
       </div>
-      <p *ngIf="!user.verifiedEmail"><span class="badge badge-danger mr-2">Adresse e-mail non vérifié</span><a
-        data-toggle="modal" data-target="#modal">Vérifie ton e-mail ici !</a>
-      </p>
-      <p class="badge badge-success" *ngIf="user.verifiedEmail">Adresse e-mail vérifié</p>
-      <p>A rejoint le {{user.createDate}}</p>
-      <p><b>Adresse e-mail :</b> {{user.email}}</p>
-      <p><b>Prénom :</b> {{user.firstName}}</p>
-      <p><b>Nom :</b> {{user.lastName}}</p>
-      <p><b>Sexe :</b> {{user.gender}}</p>
-      <hr>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Suprimer le compte</button>
-      </div>
+    </div>
+    <p *ngIf="!user.verifiedEmail"><span class="badge badge-danger mr-2">Adresse e-mail non vérifié</span><a
+      data-toggle="modal" data-target="#modal">Vérifie ton e-mail ici !</a>
+    </p>
+    <p class="badge badge-success" *ngIf="user.verifiedEmail">Adresse e-mail vérifié</p>
+    <p>A rejoint le {{user.createDate}}</p>
+    <p><b>Adresse e-mail :</b> {{user.email}}</p>
+    <p><b>Prénom :</b> {{user.firstName}}</p>
+    <p><b>Nom :</b> {{user.lastName}}</p>
+    <p><b>Sexe : </b> <span *ngIf="user.gender">{{user.gender}}</span><span *ngIf="!user.gender">non défini</span></p>
+    <hr>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Supprimer le compte</button>
+    </div>
   </div>
 </div>
 
@@ -36,14 +38,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Enter your code</h5>
+        <h5 class="modal-title" id="modalLabel">Vérifier l'adresse e-mail</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <p>Entrer votre code de vérification puis cliquer sur valider.</p>
         <form class="d-flex justify-content-center">
-          <input type="email" class="form-control" id="code" required [(ngModel)]="code" name="code" placeholder="000111">
+          <input type="email" class="form-control" id="code" required [(ngModel)]="code" name="code" placeholder="123456">
         </form>
         <p *ngIf="error" class="text-center text-danger my-2">Le code est incorrect !</p>
       </div>
@@ -59,15 +62,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Suppréssion du compte</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Suppression du compte</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Vous êtes sur le point de supprimer votre compte TodoList App !</p>
-        <p>Cette action est irréversible.</p>
-        <p>Entrer votre mot de passe puis cliquer sur suppirmer.</p>
+        <p>Vous êtes sur le point de supprimer votre compte Todo List App !</p>
+        <p><b>Cette action est irréversible.</b></p>
+        <p>Entrer votre mot de passe puis cliquer sur supprimer.</p>
         <form class="d-flex justify-content-center">
           <input type="password" class="form-control" id="password" required [(ngModel)]="pwd" name="password" placeholder="mot de passe">
         </form>

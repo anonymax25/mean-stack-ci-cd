@@ -1,19 +1,17 @@
-require('dotenv').config();
 const aws = require('aws-sdk');
 const User = require('../models').User;
 
 const s3 = new aws.S3({
-    accessKeyId: "AKIAXFXISJMREUXZLPO3",
-    secretAccessKey: "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",
-    region: "eu-west-1"
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
 });
 
 const multer = require("multer");
-let storage = multer.memoryStorage()
+let storage = multer.memoryStorage();
 let upload = multer({storage: storage});
 
 module.exports = function (app) {
-
     app.put('/user/:userId/avatar', upload.single("file"), async (req, res) => {
         const s3Key = `avatar:${req.params.userId}`;
         const params = {

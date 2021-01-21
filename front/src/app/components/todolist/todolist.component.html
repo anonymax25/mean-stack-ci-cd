@@ -5,13 +5,13 @@
 </div>
 
 <div class="jumbotron p-3 text-center bg-dark">
-    <h1 *ngIf="tasks.length > 1" class="text-light">Il est temps de travailler !<br>
+    <h3 *ngIf="tasks.length > 1" class="text-light">Il est temps de travailler !<br>
       Vous avez <span class="text-danger">{{ tasks.length }}</span> tâches
-    </h1>
-    <h1 *ngIf="tasks.length == 1" class="text-light">
+    </h3>
+    <h3 *ngIf="tasks.length == 1" class="text-light">
       Vous avez <span class="text-danger">{{ tasks.length }}</span> tâche
-    </h1>
-    <h1 *ngIf="tasks.length == 0" class="text-light">Vous n'avez aucune tâche !</h1>
+    </h3>
+    <h3 *ngIf="tasks.length == 0" class="text-light">Vous n'avez aucune tâche !</h3>
 </div>
 
 <div class="card bg-light">
@@ -20,7 +20,7 @@
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
       <div class="col-md-4 offset-md-4 col-sm-10 offset-sm-1">
         <div class="form-group">
-          <input class="form-control" id="name" type="text" formControlName="name" placeholder="Libélé de la tâche">
+          <input class="form-control" id="name" type="text" formControlName="name" placeholder="Libellé de la tâche">
           <small class="text-danger" *ngIf="nameCtrl.touched && nameCtrl.hasError('required')">
             Le libélé est obligatoire !
           </small>
