@@ -34,16 +34,21 @@ jobs:
         npm test
         echo 'Finished tests'
         npm start &
+    
+    - name: Launch front for cypress
+      working-directory: front
+      run: |
+        npm install
+        (npm start &)
       
     - name: Wait a bit for server spool-up
       uses: jakejarvis/wait-action@master
       with:
-        time: '30s' 
+        time: '10s' 
         
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
         working-directory: front
-        start: npm i && npm start
         wait-on: 'http://localhost:4200'
-        wait-on-timeout: 200
+        wait-on-timeout: 60
