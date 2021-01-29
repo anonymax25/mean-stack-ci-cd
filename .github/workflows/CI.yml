@@ -44,4 +44,5 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         working-directory: front
+        start: ng serve
         wait-on: 'http://localhost:4200'
