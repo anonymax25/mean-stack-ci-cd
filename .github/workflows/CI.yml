@@ -44,6 +44,6 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         working-directory: front
-        start: npm install && (npm start &)
+        start: npm start
         wait-on: 'http://localhost:4200'
         wait-on-timeout: 60
