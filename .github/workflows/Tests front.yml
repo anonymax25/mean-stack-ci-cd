@@ -21,29 +21,22 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.3.0
-      with:
-        mongodb-version: ${{ matrix.mongodb-version }}
-        
-    - name: Test API
+    - name: Start API
       working-directory: back
       run: |
         npm install
-        echo 'Finished back install'
-        npm test
-        echo 'Finished tests'
         npm start &
-      
-    - name: Wait a bit for server spool-up
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '10s' 
+        
+    - name: Start Front
+      working-directory: front
+      run: |
+        npm install
+        npm start &
         
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
         working-directory: front
-        start: npm start
+        start: ls
         wait-on: 'http://localhost:4200'
         wait-on-timeout: 60
