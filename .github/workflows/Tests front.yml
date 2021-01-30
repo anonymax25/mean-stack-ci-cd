@@ -31,11 +31,12 @@ jobs:
       working-directory: front
       run: |
         npm install
+        npm install -g @angular/cli
         
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
         working-directory: front
-        start: ./node_modules/@angular/cli/bin/ng
+        start: ng serve
         wait-on: 'http://localhost:4200'
         wait-on-timeout: 60
