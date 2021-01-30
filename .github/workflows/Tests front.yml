@@ -39,4 +39,4 @@ jobs:
         working-directory: front
         start: ng serve
         wait-on: 'http://localhost:4200'
-        wait-on-timeout: 60
+        wait-on-timeout: 200
