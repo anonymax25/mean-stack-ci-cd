@@ -1,4 +1,4 @@
-name: CI test
+name: Tests front
 
 on:
   push:
@@ -27,16 +27,15 @@ jobs:
         npm install
         npm start &
         
-    - name: Start Front
+    - name: Install Front
       working-directory: front
       run: |
         npm install
-        npm start &
         
     - name: Cypress run
       uses: cypress-io/github-action@v2
       with:
         working-directory: front
-        start: ls
+        start: ./node_modules/@angular/cli/bin/ng
         wait-on: 'http://localhost:4200'
         wait-on-timeout: 60
