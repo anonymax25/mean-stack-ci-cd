@@ -123,11 +123,7 @@ module.exports = function (app) {
                         email: req.params.email,
                         password: SecurityUtil.hashPassword(req.params.password)
                     });
-                    if (result.deletedCount === 1) {
-                        res.status(204).end();
-                    } else {
-                        res.status(404).end();
-                    }
+                    res.status(204).end();
                 } else{
                     res.status(404).end();
                 }
