@@ -1,6 +1,11 @@
 describe("Profile test", () => {
 
   it("should redirect to profile page", () => {
+    cy.visit("/sign-in");
+    cy.get('[type="email"]').type('cypressTest@gmail.fr');
+    cy.get('#password').type('password');
+    cy.get('.fourth').click();
+
     cy.get('#dropdownMenu').click();
     cy.get('.dropdown-menu > :nth-child(1)').click();
 
