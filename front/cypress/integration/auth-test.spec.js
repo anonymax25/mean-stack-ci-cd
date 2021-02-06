@@ -55,5 +55,8 @@ describe("Authentication test", () => {
     cy.get('.navbar-brand').should('have.text','Todo List App');
     cy.get('.text-light').should('have.text','Vous n\'avez aucune tâche !');
     cy.get('#dropdownMenu').should('have.text', ' userTest ');
+
+    cy.get('#dropdownMenu').click();
+    cy.get('.dropdown-menu > :nth-child(4)').click();
   });
 });
