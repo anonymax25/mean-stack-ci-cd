@@ -21,7 +21,7 @@ class MailerUtils {
                 subject: "Todo List App - Account Verification",
                 text: `
                 Welcome to Todo List App !
-                You create a account in our application.
+                You created a account in our application.
                 Enter the following code in your profile.
                 ${code}
               

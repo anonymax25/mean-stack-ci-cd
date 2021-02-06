@@ -11,16 +11,24 @@ let sampleTask = [];
 
 describe('routes testing', () => {
 
+    before(function (done) {
+        server.on("started", function(){
+            done();
+        });
+    });
+
     let user = {
         _id: '',
-        login: 'testing',
-        password: 'testing'
+        email: 'testing@gmail.com',
+        password: 'testing',
+        firstName: 'testing',
+        lastName: 'testing'
     }
 
     describe('Auth routes', () => {
         it('should not sign up user ', (done) => {
             chai.request(server)
-                .post('/signup')
+                .post('/sign-up')
                 .send()
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -30,11 +38,8 @@ describe('routes testing', () => {
         });
         it('should sign up user', (done) => {
             chai.request(server)
-                .post('/signup')
-                .send({
-                    login: user.login,
-                    password: user.password
-                })
+                .post('/sign-up')
+                .send(user)
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.a('object');
@@ -44,7 +49,11 @@ describe('routes testing', () => {
 
         it('should login user', (done) => {
             chai.request(server)
-                .get('/login/'+ user.login + '/' + user.password)
+                .post('/sign-in')
+                .send({
+                    email: user.email,
+                    password: user.password
+                })
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -89,15 +98,6 @@ describe('routes testing', () => {
      * TEST GET ROUTES
      */
     describe('/Get Task routes', () => {
-        it('should get a string with all /', (done) => {
-            chai.request(server)
-                .get('/')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    done();
-                });
-        });
         it('should get all tasks', (done) => {
             chai.request(server)
                 .get('/tasks/' + user._id)
@@ -140,7 +140,7 @@ describe('routes testing', () => {
     describe('End tests',()=> {
         it('should delete user and its tasks', (done) => {
             chai.request(server)
-                .delete('/user/' + user.login + '/' + user.password)
+                .delete('/user/' + user.email + '/' + user.password)
                 .end((err, res) => {
                     res.should.have.status(204);
                     res.body.should.be.a('object');

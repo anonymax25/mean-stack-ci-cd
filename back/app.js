@@ -49,6 +49,7 @@ async function startServer() {
                 console.log('Connected to DB');
                 app.listen(8181, () => {
                     console.log("Listening at :8181...");
+                    app.emit("started");
                 });
             }
         })

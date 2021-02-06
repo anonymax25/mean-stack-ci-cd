@@ -3,13 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0",
+    "start": "ng serve --port 4200",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cypress": "concurrently \"ng serve\" \"cypress open\"",
-    "cypress-silent": "cypress run ./cypress/integration/front/login-test.spec.js"
+    "cypress": "concurrently \"ng serve\" \"cypress open\""
   },
   "private": true,
   "dependencies": {
