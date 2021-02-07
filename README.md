@@ -22,9 +22,4 @@ aws guru for traffic monitoring
 aws S3 for bucket storage for avatars in the app  
 aws SES for emailing  
 
-## Docker Compose launch
-```bash
-docker-compose build && docker-compose up -d
-```
-
 
