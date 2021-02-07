@@ -5,6 +5,12 @@
 
 This school project was made to test development tools such as Docker/Docker-compose, git, back-end and front-end integration testing, deployement to AWS ec2 and more cloud services.
 
+## Technos
+Front-end -> Angular 9  
+Back-end -> Node.js, express  
+Database -> MongoDB  
+App build with docker-compose
+
 ## Continuous Integration
 Front-end tests -> Cypress  
 Back-end integration tests -> Mocha & chai-http  
